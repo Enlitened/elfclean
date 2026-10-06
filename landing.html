@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ElfClean</title>
+<meta name="description" content="ElfClean finds the space developer tools quietly use on your Mac (Xcode, simulators, package caches, old node_modules, AI models and agent worktrees) and lets you review every item before it moves to the Trash.">
+<meta property="og:title" content="ElfClean: find the space your dev tools left behind">
+<meta property="og:description" content="Xcode, simulators, package caches, old node_modules, AI models and agent worktrees. Review every item; everything goes to the Trash first.">
+<meta property="og:image" content="shots/01-clean-light.png">
+<link rel="stylesheet" href="style.css">
+<style>
+  main.wide { max-width: 960px; }
+  .hero { text-align: center; padding: 24px 0 8px; }
+  .hero h1 { font-size: clamp(32px, 6vw, 52px); font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; margin: 0 0 16px; }
+  .hero p { font-size: 20px; margin: 0 auto 28px; max-width: 640px; }
+  .cta { display: inline-block; background: var(--fg); color: var(--bg); text-decoration: none; padding: 14px 26px; border-radius: 12px; font-weight: 600; }
+  .cta-note { display: block; margin-top: 12px; font-size: 15px; }
+  .shot { display: block; width: 100%; height: auto; border-radius: 12px; margin: 40px 0; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin: 16px 0; }
+  .card { border: 1px solid var(--rule); border-radius: 12px; padding: 18px 20px; }
+  .card h3 { margin: 0 0 6px; font-size: 17px; }
+  .card p { margin: 0; font-size: 15px; color: var(--muted); }
+  .price { font-size: 28px; font-weight: 600; margin: 4px 0; }
+</style>
+</head>
+<body>
+<main class="wide">
+<header>
+  <a class="brand" href="landing.html">ELF ✦ CLEAN</a>
+  <nav><a href="./">Support</a><a href="privacy.html">Privacy</a></nav>
+</header>
+
+<section class="hero">
+  <h1>Find the space your dev tools left behind</h1>
+  <p class="muted">Xcode DerivedData, simulators, package caches, old <code>node_modules</code>, AI models and agent worktrees. Review every item; everything goes to the Trash first.</p>
+  <!-- Swap in Apple's official "Download on the Mac App Store" badge before publishing. -->
+  <a class="cta" href="https://apps.apple.com/app/id6819001057">Download on the Mac App Store</a>
+  <span class="cta-note muted">Scanning is free. macOS 14 or later.</span>
+</section>
+
+<img class="shot" src="shots/01-clean-light.png" alt="ElfClean's Clean screen: gigabytes found in Xcode, simulators, package caches, project build folders and AI models, with a level to choose how far to go.">
+
+<h2>What it finds</h2>
+<div class="grid">
+  <div class="card"><h3>Xcode and simulators</h3><p>DerivedData, archives, device support and simulator devices, with the runtime each device uses.</p></div>
+  <div class="card"><h3>Project build folders</h3><p>node_modules, .next, .build, Rust target, uv .venv and Pods in projects you haven't touched for a while. Recent projects start unticked; Full Clean includes them only after its warning and review confirmation.</p></div>
+  <div class="card"><h3>Package caches</h3><p>npm, pnpm, Yarn, Bun, pip, uv, Poetry, Cargo, Go, Gradle, CocoaPods, Swift packages and Homebrew.</p></div>
+  <div class="card"><h3>AI models and agents</h3><p>Ollama and Hugging Face models, shared layers counted once. Claude Code and Codex history and the git worktrees agents leave behind.</p></div>
+  <div class="card"><h3>Everyday clutter</h3><p>App caches and logs, old downloads, browser caches and leftovers from apps you deleted, in plain language.</p></div>
+  <div class="card"><h3>Where space went</h3><p>A storage map of your home folder, large files with Quick Look, and duplicates found byte for byte.</p></div>
+</div>
+
+<img class="shot" src="shots/02-confirm-light.png" alt="The review sheet: every item grouped by whether it rebuilds itself, with its size, before anything moves to the Trash.">
+
+<h2>Careful by design</h2>
+<ul>
+  <li><strong>You review every item.</strong> Nothing moves until you've seen what it is, what removing it changes and how to get it back.</li>
+  <li><strong>The Trash first.</strong> Items go to the Trash by default; History records where each came from. Space is freed when you empty the Trash.</li>
+  <li><strong>Git-aware.</strong> A repository or worktree with uncommitted or unpushed work is never ticked for you, and is re-checked just before removal.</li>
+  <li><strong>Hands off.</strong> Mail, Keychains, Photos, iCloud Drive, cloud drives and anything outside your home folder are never touched.</li>
+  <li><strong>Honest numbers.</strong> No "speeds up your Mac", no health score: just measured sizes.</li>
+</ul>
+
+<h2>One purchase</h2>
+<p class="price">Pay once</p>
+<p class="muted">The App Store shows the price in your currency, including any launch offer. Scanning, the storage map, previews, History, removing an app and cleaning one item at a time are free. The unlock cleans everything you select in one go, on your Macs and with Family Sharing. No subscription.</p>
+
+<h2>Private</h2>
+<p class="muted">Sandboxed and sold through the Mac App Store. No accounts, analytics or telemetry; nothing about your files leaves your Mac.</p>
+
+<p style="text-align:center; margin-top:40px"><a class="cta" href="https://apps.apple.com/app/id6819001057">Get ElfClean</a></p>
+
+<footer>
+  © 2026 Colin Sergay · <a href="./">Support</a> · <a href="privacy.html">Privacy</a>
+</footer>
+</main>
+</body>
+</html>
