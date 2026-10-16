@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ElfClean</title>
-<meta name="description" content="ElfClean finds the space developer tools quietly use on your Mac (Xcode, simulators, package caches, old node_modules, AI models and agent worktrees) and lets you review every item before it moves to the Trash.">
-<meta property="og:title" content="ElfClean: find the space your dev tools left behind">
-<meta property="og:description" content="Xcode, simulators, package caches, old node_modules, AI models and agent worktrees. Review every item; everything goes to the Trash first.">
+<meta name="description" content="Building with AI, or just running it? ElfClean finds the space coding agents, local AI models, AI apps and developer tools quietly use on your Mac, and lets you review every item before it moves to the Trash.">
+<meta property="og:title" content="ElfClean: find the space AI and code left behind">
+<meta property="og:description" content="Vibe coding and AI tools leave gigabytes behind: node_modules, agent worktrees, local models, app caches. Review every item; everything goes to the Trash first.">
 <meta property="og:image" content="shots/01-clean-light.png">
 <link rel="stylesheet" href="style.css">
 <style>
@@ -32,8 +32,8 @@
 </header>
 
 <section class="hero">
-  <h1>Find the space your dev tools left behind</h1>
-  <p class="muted">Xcode DerivedData, simulators, package caches, old <code>node_modules</code>, AI models and agent worktrees. Review every item; everything goes to the Trash first.</p>
+  <h1>Find the space AI and code left behind</h1>
+  <p class="muted">Building with AI, or just running it? Coding agents, local models and AI apps quietly fill your Mac. ElfClean finds that space, explains each item in plain language and moves nothing until you've reviewed it.</p>
   <!-- Swap in Apple's official "Download on the Mac App Store" badge before publishing. -->
   <a class="cta" href="https://apps.apple.com/app/id6819001057">Download on the Mac App Store</a>
   <span class="cta-note muted">Scanning is free. macOS 15 or later.</span>
@@ -41,12 +41,19 @@
 
 <img class="shot" src="shots/01-clean-light.png" alt="ElfClean's Clean screen: gigabytes found in Xcode, simulators, package caches, project build folders and AI models, with a level to choose how far to go.">
 
+<h2>Who it's for</h2>
+<div class="grid">
+  <div class="card"><h3>Vibe coders</h3><p>Every project an AI helped you build keeps its own <code>node_modules</code>, build folders and caches, and coding agents leave worktrees, logs and old versions behind. ElfClean finds them in projects you haven't touched for a while, and tells you which projects aren't saved anywhere else before you remove anything.</p></div>
+  <div class="card"><h3>People who run AI on their Mac</h3><p>Local models are often 5 to 40 GB each. See every Ollama and Hugging Face model, with shared files counted once, add model folders you keep elsewhere, and clear AI apps' caches and logs, in plain language.</p></div>
+  <div class="card"><h3>Developers</h3><p>Xcode DerivedData and simulators, package caches for every major ecosystem, and the Git worktrees your agents made, with the merged ones ready to prune.</p></div>
+</div>
+
 <h2>What it finds</h2>
 <div class="grid">
   <div class="card"><h3>Xcode and simulators</h3><p>DerivedData, archives, device support and simulator devices, with the runtime each device uses.</p></div>
   <div class="card"><h3>Project build folders</h3><p>node_modules, .next, .build, Rust target, uv .venv and Pods in projects you haven't touched for a while. Recent projects start unticked; Full Clean includes them only after its warning and review confirmation.</p></div>
   <div class="card"><h3>Package caches</h3><p>npm, pnpm, Yarn, Bun, pip, uv, Poetry, Cargo, Go, Gradle, CocoaPods, Swift packages and Homebrew.</p></div>
-  <div class="card"><h3>AI models and agents</h3><p>Ollama and Hugging Face models, shared layers counted once. Claude Code and Codex history and the git worktrees agents leave behind.</p></div>
+  <div class="card"><h3>AI models and agents</h3><p>Ollama and Hugging Face models, shared layers counted once. Caches, logs, old versions and history from Claude Code, Codex, Cursor, Devin, VS Code, Roo Code, Aider and Continue, and the Git worktrees agents leave behind. History is archived, never treated as a cache.</p></div>
   <div class="card"><h3>Everyday clutter</h3><p>App caches and logs, old downloads, browser caches and leftovers from apps you deleted, in plain language.</p></div>
   <div class="card"><h3>Where space went</h3><p>A storage map of your home folder, large files with Quick Look, and duplicates found byte for byte.</p></div>
 </div>
@@ -57,7 +64,7 @@
 <ul>
   <li><strong>You review every item.</strong> Nothing moves until you've seen what it is, what removing it changes and how to get it back.</li>
   <li><strong>The Trash first.</strong> Items go to the Trash by default; History records where each came from and can put it back while it is still there. Space is freed when you empty the Trash.</li>
-  <li><strong>Git-aware.</strong> A repository or worktree with uncommitted or unpushed work is never ticked for you, and is re-checked just before removal.</li>
+  <li><strong>Git-aware.</strong> A project with work that isn't committed or pushed anywhere is marked At risk and never ticked for you, and is re-checked just before removal. Handy when an AI wrote most of the code and you're not sure what's saved.</li>
   <li><strong>Hands off.</strong> Mail, Keychains, Photos, iCloud Drive, cloud drives and anything outside your home folder are never touched.</li>
   <li><strong>Honest numbers.</strong> No "speeds up your Mac", no health score: just measured sizes.</li>
 </ul>
