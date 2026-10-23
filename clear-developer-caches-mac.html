@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clear pip, uv, Homebrew, Cargo and other caches on a Mac | ElfClean</title>
+<meta name="description" content="Where pip, uv, Poetry, Homebrew, Cargo, Go, Gradle, CocoaPods and SwiftPM keep their caches on macOS, and the official command to check and clear each one.">
+<link rel="canonical" href="https://elfclean.app/clear-developer-caches-mac">
+<meta name="theme-color" content="#f1f6f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#06110e" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ElfClean">
+<meta property="og:url" content="https://elfclean.app/clear-developer-caches-mac">
+<meta property="og:title" content="Clear pip, uv, Homebrew, Cargo and other caches on a Mac">
+<meta property="og:description" content="Where pip, uv, Poetry, Homebrew, Cargo, Go, Gradle, CocoaPods and SwiftPM keep their caches on macOS, and the official command to check and clear each one.">
+<meta property="og:image" content="https://elfclean.app/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://elfclean.app/assets/og-card.png">
+<link rel="icon" href="/assets/favicon-64.png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<!-- The shipped app and the App Store listing still link to enlitened.github.io/elfclean/; send
+     those visits to the same page here (the old root was the support page). -->
+<script>if (location.hostname.endsWith("github.io")) { var p = location.pathname.replace(/^\/elfclean\/?/, "").replace(/\.html$/, ""); location.replace("https://elfclean.app/" + (p === "" || p === "index" ? "support" : p) + location.hash); }</script>
+<link rel="preload" href="/assets/fonts/HankenGrotesk.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Clear pip, uv, Homebrew, Cargo and other caches on a Mac",
+      "description": "Where pip, uv, Poetry, Homebrew, Cargo, Go, Gradle, CocoaPods and SwiftPM keep their caches on macOS, and the official command to check and clear each one.",
+      "datePublished": "2026-10-23",
+      "dateModified": "2026-10-23",
+      "mainEntityOfPage": "https://elfclean.app/clear-developer-caches-mac",
+      "image": "https://elfclean.app/assets/og-card.png",
+      "author": {
+        "@type": "Person",
+        "name": "Colin Sergay"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Colin Sergay"
+      },
+      "about": {
+        "@id": "https://elfclean.app/#app"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ElfClean",
+          "item": "https://elfclean.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://elfclean.app/#guides"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Developer caches",
+          "item": "https://elfclean.app/clear-developer-caches-mac"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/apple-touch-icon.png" alt="" width="34" height="34">ElfClean</a>
+    <nav aria-label="Main">
+      <a class="optional" href="/#guides">Guides</a>
+      <a class="optional" href="/support">Support</a>
+      <a class="button small" href="mailto:csergay@gmail.com?subject=Tell%20me%20when%20ElfClean%20is%20out" data-store-href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_clear_developer_caches_mac_nav&amp;mt=12" data-store-label="Mac App Store">Get notified</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="article">
+  <div class="narrow">
+      <p class="crumbs"><a href="/">ElfClean</a> / <a href="/#guides">Guides</a></p>
+      <h1>How to clear pip, uv, Homebrew, Cargo and other developer caches on a Mac</h1>
+      <p class="standfirst">Every package manager keeps a shared cache of what it downloaded, so the next install is faster. None of them shrink much by themselves, and after a year of trying out tools and AI-generated projects they can add up to tens of gigabytes. Here's where each one lives on macOS and the command its makers give you to clear it.</p>
+
+      <h2>Is it safe to clear them?</h2>
+      <p>Yes, for everything on this page. These caches hold copies of things you can download again. Your projects and installed environments aren't inside them. Clearing one costs you two things:</p>
+      <ul>
+        <li><strong>Time and bandwidth.</strong> The next install or build downloads, and sometimes compiles, what it needs again.</li>
+        <li><strong>Working offline.</strong> Until you've reconnected and installed again, a project that needs something you cleared won't build. Clear caches before a flight's worth of work, not during it.</li>
+      </ul>
+      <p>Quit editors and stop running builds first. A package manager halfway through an install can be left confused if its cache vanishes under it.</p>
+
+      <h2>See how big they are</h2>
+      <p>One command for the usual places:</p>
+<pre><code>du -sh ~/Library/Caches/{pip,pypoetry,Homebrew,CocoaPods,org.swift.swiftpm,go-build} \
+  ~/.cache/{uv,pre-commit} ~/.cargo/{registry,git} ~/go/pkg/mod ~/.gradle/{caches,wrapper} \
+  2&gt;/dev/null | sort -h</code></pre>
+      <p>Missing folders are skipped. If you've moved a cache with an environment variable or a config file, ask the tool where it is with the commands below.</p>
+
+      <h2>Python: pip, uv and Poetry</h2>
+      <div class="table-scroll">
+      <table>
+        <thead><tr><th>Tool</th><th>Cache on macOS</th><th>See it</th><th>Clear it</th></tr></thead>
+        <tbody>
+          <tr><td>pip</td><td><code>~/Library/Caches/pip</code></td><td><code>pip cache dir</code>, <code>pip cache info</code></td><td><code>pip cache purge</code></td></tr>
+          <tr><td>uv</td><td><code>~/.cache/uv</code></td><td><code>uv cache dir</code>, <code>uv cache size -H</code></td><td><code>uv cache prune</code> or <code>uv cache clean</code></td></tr>
+          <tr><td>Poetry</td><td><code>~/Library/Caches/pypoetry</code></td><td><code>poetry cache list</code></td><td><code>poetry cache clear pypi --all</code></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>Use <code>python3 -m pip</code> if there's no <code>pip</code> command, and run it with each Python you use, since they normally share one cache. <code>pip cache remove &lt;package&gt;</code> clears a single package.</p>
+      <p><code>uv cache prune</code> removes only entries nothing uses any more, and is the gentler choice. <code>uv cache clean</code> removes everything; add package names to clear just those. Virtual environments uv already made keep working either way. Python versions uv installed live in <code>~/.local/share/uv/python</code>, not the cache.</p>
+      <p>Poetry names each cache after its source. <code>poetry cache list</code> shows them, usually just <code>pypi</code>. Without <code>--all</code>, <code>poetry cache clear</code> expects a single package and version.</p>
+
+      <h2>Homebrew</h2>
+<pre><code>brew --cache                  # ~/Library/Caches/Homebrew
+brew cleanup --dry-run        # what would go
+brew cleanup --prune=all</code></pre>
+      <p><code>brew cleanup</code> also removes old versions of installed formulae from <code>/opt/homebrew</code> (or <code>/usr/local</code> on Intel Macs), which is often more space than the downloads. <code>--prune=all</code> removes every cached download, not only old ones. Installed software keeps working; reinstalling something downloads it again.</p>
+      <p>Homebrew also runs a cleanup by itself every 30 days. Downloads for the versions you have installed can be kept; to remove everything, Homebrew's own help suggests <code>rm -rf "$(brew --cache)"</code>.</p>
+
+      <h2>Rust: Cargo</h2>
+      <p>Cargo keeps downloaded crates in <code>~/.cargo/registry</code> (<code>cache</code> holds the compressed downloads, <code>src</code> the unpacked copies) and Git dependencies in <code>~/.cargo/git</code>. Cargo has no command of its own to clear them. Recent versions remove downloads that haven't been used for a few months on their own, but only slowly.</p>
+<pre><code>du -sh ~/.cargo/registry ~/.cargo/git
+rm -rf ~/.cargo/registry/cache ~/.cargo/registry/src ~/.cargo/git/checkouts</code></pre>
+      <p>Leave <code>~/.cargo/bin</code> and your config alone: those are your installed tools and settings. <code>cargo cache</code> is a third-party command (<code>cargo install cargo-cache</code>), not part of Cargo; it shows sizes and has an <code>--autoclean</code> option. The biggest Rust folders are usually each project's own <code>target</code> folder, which <code>cargo clean</code> removes.</p>
+
+      <h2>Go</h2>
+<pre><code>go env GOCACHE GOMODCACHE
+go clean -cache       # compiled packages, ~/Library/Caches/go-build
+go clean -modcache    # downloaded modules, ~/go/pkg/mod</code></pre>
+      <p>The build cache is safe to clear at any time; builds and tests are slower once. The module cache needs a connection to fill again. Go marks module files read-only, so use <code>go clean -modcache</code> rather than <code>rm -rf</code>, which stops with permission errors.</p>
+
+      <h2>Gradle, CocoaPods and Swift packages</h2>
+      <div class="table-scroll">
+      <table>
+        <thead><tr><th>Tool</th><th>Cache on macOS</th><th>Clear it with</th></tr></thead>
+        <tbody>
+          <tr><td>Gradle</td><td><code>~/.gradle/caches</code> and <code>~/.gradle/wrapper/dists</code></td><td>No command; stop daemons with <code>./gradlew --stop</code>, then delete the folders.</td></tr>
+          <tr><td>CocoaPods</td><td><code>~/Library/Caches/CocoaPods</code></td><td><code>pod cache list</code>, then <code>pod cache clean --all</code></td></tr>
+          <tr><td>Swift packages</td><td><code>~/Library/Caches/org.swift.swiftpm</code></td><td><code>swift package purge-cache</code></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>Gradle tidies entries it hasn't used for a while by itself, but each Gradle version a project's wrapper downloads stays in <code>wrapper/dists</code>, often several hundred megabytes each. Keep <code>~/.gradle/gradle.properties</code>, which may hold your settings and credentials. For Xcode's own build folders, see <a href="/clear-xcode-deriveddata">clearing Xcode DerivedData</a>.</p>
+
+      <h2>JavaScript: npm, pnpm, Yarn and Bun</h2>
+      <div class="table-scroll">
+      <table>
+        <thead><tr><th>Manager</th><th>Cache</th><th>Clear it with</th></tr></thead>
+        <tbody>
+          <tr><td>npm</td><td><code>~/.npm/_cacache</code></td><td><code>npm cache clean --force</code></td></tr>
+          <tr><td>pnpm</td><td><code>~/Library/pnpm/store</code></td><td><code>pnpm store prune</code></td></tr>
+          <tr><td>Yarn</td><td><code>~/Library/Caches/Yarn</code></td><td><code>yarn cache clean</code></td></tr>
+          <tr><td>Bun</td><td><code>~/.bun/install/cache</code></td><td><code>bun pm cache rm</code></td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>The shared caches are usually smaller than the <code>node_modules</code> folders in each project. See <a href="/delete-node-modules-mac">how to delete old node_modules folders</a>.</p>
+
+      <h2>pre-commit</h2>
+<pre><code>pre-commit gc      # environments no config uses any more
+pre-commit clean   # everything in ~/.cache/pre-commit</code></pre>
+      <p>pre-commit keeps a copy of every hook repository your configs name, each with its own environment. After <code>clean</code>, the next commit in each repository installs its hooks again, which takes a while and needs a connection.</p>
+
+      <h2>How ElfClean does it</h2>
+      <p>ElfClean finds the package caches for npm, pnpm, Yarn, Bun, pip, uv, Poetry, Cargo, Go, Gradle, CocoaPods, Swift packages, Homebrew and pre-commit in the locations above, and says in plain language what each one is, what happens if it's removed and how it comes back. Caches that rebuild themselves are marked Safe. Go's module cache is marked Review, because builds that need it fail offline until you download again.</p>
+      <p>It also finds build folders and virtual environments inside projects you haven't touched for a while. Homebrew's old installed versions live outside your home folder, so ElfClean can't remove them; its "Reclaim with the tool's own command" section on the AI &amp; coding screen gives you <code>brew cleanup --prune=all</code> to copy into Terminal instead.</p>
+      <p>Running tools are left alone. Everything goes to the Trash, and History can put it back.</p>
+      <aside class="cta-box">
+        <h2>Or let ElfClean find them for you</h2>
+        <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Everything goes to the Trash first. Scanning is free.<span data-prelaunch> ElfClean is coming soon to the Mac App Store.</span></p>
+        <a class="button" href="mailto:csergay@gmail.com?subject=Tell%20me%20when%20ElfClean%20is%20out" data-store-href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_clear_developer_caches_mac&amp;mt=12" data-store-label="Get ElfClean on the Mac App Store">Email me when it's out</a>
+      </aside>
+
+      <h2>More guides</h2>
+      <ul>
+        <li><a href="/delete-node-modules-mac">How to delete old node_modules folders on a Mac safely</a></li>
+        <li><a href="/remove-ollama-hugging-face-models">Where Ollama and Hugging Face store models on a Mac, and how to remove them</a></li>
+        <li><a href="/ai-coding-agents-disk-space">What Claude Code, Codex and Cursor leave on your Mac</a></li>
+        <li><a href="/clear-xcode-deriveddata">How to clear Xcode DerivedData, simulators and device support</a></li>
+        <li><a href="/system-data-mac">What System Data is on a Mac, and how to make it smaller</a></li>
+        <li><a href="/find-large-files-duplicates-mac">How to find large files and duplicates on a Mac</a></li>
+        <li><a href="/docker-disk-space-mac">How to free up Docker disk space on a Mac</a></li>
+        <li><a href="/mac-cleaner-for-developers">Mac cleaners for developers compared: CleanMyMac alternatives</a></li>
+      </ul>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <p><strong>ElfClean</strong> frees up space from AI tools and code on your Mac.</p>
+      <p>© 2026 Colin Sergay. Mac and Xcode are trademarks of Apple Inc. Other product names belong to their owners; ElfClean isn't affiliated with them.</p>
+    </div>
+    <div>
+      <h2>Guides</h2>
+      <ul>
+        <li><a href="/delete-node-modules-mac">node_modules</a></li>
+        <li><a href="/remove-ollama-hugging-face-models">Ollama and Hugging Face</a></li>
+        <li><a href="/ai-coding-agents-disk-space">Coding agents</a></li>
+        <li><a href="/clear-xcode-deriveddata">Xcode</a></li>
+        <li><a href="/system-data-mac">System Data</a></li>
+        <li><a href="/docker-disk-space-mac">Docker disk space</a></li>
+        <li><a href="/clear-developer-caches-mac">Developer caches</a></li>
+        <li><a href="/find-large-files-duplicates-mac">Large files and duplicates</a></li>
+        <li><a href="/mac-cleaner-for-developers">Cleaners compared</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>ElfClean</h2>
+      <ul>
+        <li><a href="/support">Support</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/press">Press kit</a></li>
+        <li><a href="/creators">For creators</a></li>
+        <li><a href="mailto:csergay@gmail.com?subject=ElfClean">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

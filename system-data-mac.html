@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What System Data is on a Mac, and how to make it smaller | ElfClean</title>
+<meta name="description" content="What macOS counts as System Data, how to see what's inside it with Finder and Terminal, and which caches, snapshots and app files are safe to clear.">
+<link rel="canonical" href="https://elfclean.app/system-data-mac">
+<meta name="theme-color" content="#f1f6f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#06110e" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ElfClean">
+<meta property="og:url" content="https://elfclean.app/system-data-mac">
+<meta property="og:title" content="What System Data is on a Mac, and how to make it smaller">
+<meta property="og:description" content="What macOS counts as System Data, how to see what's inside it with Finder and Terminal, and which caches, snapshots and app files are safe to clear.">
+<meta property="og:image" content="https://elfclean.app/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://elfclean.app/assets/og-card.png">
+<link rel="icon" href="/assets/favicon-64.png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<!-- The shipped app and the App Store listing still link to enlitened.github.io/elfclean/; send
+     those visits to the same page here (the old root was the support page). -->
+<script>if (location.hostname.endsWith("github.io")) { var p = location.pathname.replace(/^\/elfclean\/?/, "").replace(/\.html$/, ""); location.replace("https://elfclean.app/" + (p === "" || p === "index" ? "support" : p) + location.hash); }</script>
+<link rel="preload" href="/assets/fonts/HankenGrotesk.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "What System Data is on a Mac, and how to make it smaller",
+      "description": "What macOS counts as System Data, how to see what's inside it with Finder and Terminal, and which caches, snapshots and app files are safe to clear.",
+      "datePublished": "2026-10-23",
+      "dateModified": "2026-10-23",
+      "mainEntityOfPage": "https://elfclean.app/system-data-mac",
+      "image": "https://elfclean.app/assets/og-card.png",
+      "author": {
+        "@type": "Person",
+        "name": "Colin Sergay"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Colin Sergay"
+      },
+      "about": {
+        "@id": "https://elfclean.app/#app"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ElfClean",
+          "item": "https://elfclean.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://elfclean.app/#guides"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "System Data",
+          "item": "https://elfclean.app/system-data-mac"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/apple-touch-icon.png" alt="" width="34" height="34">ElfClean</a>
+    <nav aria-label="Main">
+      <a class="optional" href="/#guides">Guides</a>
+      <a class="optional" href="/support">Support</a>
+      <a class="button small" href="mailto:csergay@gmail.com?subject=Tell%20me%20when%20ElfClean%20is%20out" data-store-href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_system_data_mac_nav&amp;mt=12" data-store-label="Mac App Store">Get notified</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="article">
+  <div class="narrow">
+      <p class="crumbs"><a href="/">ElfClean</a> / <a href="/#guides">Guides</a></p>
+      <h1>What System Data is on a Mac, and how to make it smaller</h1>
+      <p class="standfirst">System Data is the grey bar in Storage settings that macOS won't let you open. It isn't one thing: it's everything that doesn't fit Apple's other categories. Some of it is yours to clear, some of it macOS manages itself, and a little of it is the only copy of something. Here's how to tell them apart.</p>
+
+      <h2>What macOS counts as System Data</h2>
+      <p>Storage settings sorts your disk into categories such as Applications, Documents, Photos, iCloud Drive and macOS. Whatever doesn't match one of them lands in System Data. On a Mac used for development or AI work it's common to see 50 GB or more. The usual contents:</p>
+      <div class="table-scroll">
+      <table>
+        <thead><tr><th>What</th><th>Where</th><th>Safe to remove?</th></tr></thead>
+        <tbody>
+          <tr><td>App caches</td><td><code>~/Library/Caches</code></td><td>Yes, for third-party apps. Apps rebuild them; the first launch afterwards may be slower.</td></tr>
+          <tr><td>Logs and crash reports</td><td><code>~/Library/Logs</code></td><td>Yes. Apps start new ones.</td></tr>
+          <tr><td>Developer files</td><td><code>~/Library/Developer</code>, <code>~/.npm</code>, <code>~/.cache</code> and similar</td><td>Mostly. Build products and package caches rebuild; Xcode archives and simulator devices may not.</td></tr>
+          <tr><td>App data</td><td><code>~/Library/Application Support</code>, <code>~/Library/Containers</code></td><td>Careful. This is where apps keep your settings, libraries and sometimes your only copy of what you made in them.</td></tr>
+          <tr><td>Virtual machine and Docker disks</td><td>Inside each app's folder, often under <code>~/Library/Containers</code></td><td>Only through the app. Deleting the disk file deletes every container, image or VM in it.</td></tr>
+          <tr><td>iPhone and iPad backups</td><td><code>~/Library/Application Support/MobileSync/Backup</code></td><td>Check first. An old backup may hold photos or messages that exist nowhere else.</td></tr>
+          <tr><td>Time Machine local snapshots</td><td>On the system volume, outside your home folder</td><td>macOS removes them when it needs the space. You can thin them yourself.</td></tr>
+          <tr><td>Swap and the sleep image</td><td><code>/private/var/vm</code></td><td>No. macOS manages these; they change size as you use the Mac.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>Exactly which category a given folder lands in isn't documented and has changed between macOS versions, so treat this as a map of where to look rather than an exact breakdown.</p>
+
+      <h2>See what's in it</h2>
+      <h3>Storage settings</h3>
+      <p>Open System Settings, then General, then Storage. The bar at the top shows each category, and the list below has an information button for most of them. System Data has none: there's no list of what's inside. The Documents category is still worth a look, because its Large Files, Downloads and File Browser views show some of the same folders from a different angle.</p>
+      <p>The figure can take a while to settle after you free space, and it sometimes includes purgeable space macOS would release on its own. Don't judge a cleanup by the bar in the first few minutes.</p>
+
+      <h3>Your Library folder</h3>
+      <p>Most of the System Data you can do anything about is in the Library folder inside your home folder. Finder hides it; to open it, choose Go, then Go to Folder, and type <code>~/Library</code>. Or hold Option while the Go menu is open and choose Library.</p>
+      <p>To see which folders in it are biggest, run this in Terminal (the largest are listed last):</p>
+<pre><code>du -sh ~/Library/* 2&gt;/dev/null | sort -h</code></pre>
+      <p>Then go one level deeper into whichever is largest, for example:</p>
+<pre><code>du -sh ~/Library/Application\ Support/* 2&gt;/dev/null | sort -h | tail -15
+du -sh ~/Library/Containers/* 2&gt;/dev/null | sort -h | tail -15</code></pre>
+      <p>Some folders are private to macOS, so <code>du</code> skips them unless Terminal has Full Disk Access (in Privacy &amp; Security). The <code>2&gt;/dev/null</code> hides those "Operation not permitted" lines; the totals are then a little low, never too high.</p>
+      <p>Developers should also check the hidden folders at the top of the home folder, where package managers and AI tools keep their caches:</p>
+<pre><code>du -sh ~/.[!.]* 2&gt;/dev/null | sort -h | tail -15</code></pre>
+
+      <h3>Time Machine local snapshots</h3>
+      <p>If Time Machine is on, macOS keeps snapshots on your internal disk so you can restore files while the backup disk is away. List them with:</p>
+<pre><code>tmutil listlocalsnapshots /</code></pre>
+      <p>macOS keeps them for about 24 hours and deletes them sooner when space runs low, so they rarely need attention. If you need space back now, you can ask macOS to thin them, here by up to 20 GB at the highest urgency:</p>
+<pre><code>sudo tmutil thinlocalsnapshots / 20000000000 4</code></pre>
+      <p>Or delete the ones from a particular date and time, copied from the list above:</p>
+<pre><code>sudo tmutil deletelocalsnapshots 2026-10-20-101500</code></pre>
+      <p class="note">A deleted snapshot can't be restored from. If your backup disk hasn't been connected for a while, the local snapshots may be the only Time Machine history of recent changes.</p>
+
+      <h2>What's safe to clear</h2>
+      <h3>Caches and logs</h3>
+      <p>Folders in <code>~/Library/Caches</code> belonging to third-party apps can go, ideally with the app quit. Leave the <code>com.apple.*</code> folders alone: macOS rebuilds them too, but some hold state system services expect, and clearing them rarely frees much. Everything in <code>~/Library/Logs</code> can go; you lose old crash reports, nothing else.</p>
+
+      <h3>Developer and AI tool files</h3>
+      <p>These are often the largest part. Xcode's DerivedData, simulator caches, package-manager caches (npm, pnpm, pip, uv, Cargo, Homebrew) and the caches and old versions coding agents leave behind all rebuild themselves. Local AI models in <code>~/.ollama</code> or <code>~/.cache/huggingface</code> can be downloaded again, but at 5 to 40 GB each that takes a while. Our guides to <a href="/clear-xcode-deriveddata">Xcode's files</a>, <a href="/delete-node-modules-mac">node_modules</a>, <a href="/remove-ollama-hugging-face-models">local models</a> and <a href="/ai-coding-agents-disk-space">coding agents</a> go through each.</p>
+
+      <h3>Docker and virtual machines</h3>
+      <p>Docker Desktop keeps every image, container and volume in a single disk image under <code>~/Library/Containers/com.docker.docker</code>. Don't delete that file to free space; you'd lose everything in it, volumes included. Instead see what's using space and prune what you don't need:</p>
+<pre><code>docker system df
+docker system prune</code></pre>
+      <p><code>docker system prune</code> removes stopped containers, unused networks, dangling images and unused build cache; it asks before it starts and leaves volumes alone unless you add <code>--volumes</code>. The disk image may not shrink straight away. Virtual machines in UTM, Parallels or VMware are best removed from inside those apps. Our <a href="/docker-disk-space-mac">Docker guide</a> goes through each prune command.</p>
+
+      <h3>iPhone and iPad backups</h3>
+      <p>Connect the device, select it in Finder's sidebar and, on the General tab, click Manage Backups. The list there shows the backups of every device on this Mac, with their dates. The files themselves are in <code>~/Library/Application Support/MobileSync/Backup</code>, which Terminal can read only with Full Disk Access. Delete backups of devices you no longer own once you're sure nothing on them is missing elsewhere.</p>
+
+      <h3>Leftovers from deleted apps</h3>
+      <p>Dragging an app to the Trash leaves its folders in Application Support, Containers and Preferences. If you're sure the app is gone for good, and you don't want anything you made in it, those folders can go too. Check the name first: a folder named after a company may serve several of its apps.</p>
+
+      <h2>What to leave alone</h2>
+      <ul>
+        <li><strong>Anything outside your home folder</strong>, such as <code>/System</code>, <code>/private/var</code> and <code>/Library</code>. macOS manages these, and the system volume is sealed against changes anyway.</li>
+        <li><strong>Mail, Messages, Photos and Music libraries.</strong> Remove things from inside those apps, not in Finder.</li>
+        <li><strong>Keychains and anything holding credentials.</strong></li>
+        <li><strong>Whole folders in Application Support or Containers for apps you still use.</strong> These are data, not caches.</li>
+      </ul>
+      <p class="note">Commands like <code>rm -rf</code> skip the Trash. While you're clearing out folders you don't know well, drag them to the Trash in Finder instead, and empty it once you've used the Mac for a day or two without problems.</p>
+
+      <h2>How ElfClean does it</h2>
+      <p>ElfClean measures your home folder and the folders you add, not the whole disk, so it doesn't see or remove Time Machine snapshots, swap or anything else macOS owns. That's deliberate: the part of System Data you can safely clear lives in your home folder, and that's where ElfClean looks.</p>
+      <p>Its storage map shows where space goes in your home folder. A scan finds app caches and logs (leaving Apple's own system caches alone), leftovers from apps you've deleted, Xcode and package-manager caches, AI tools' caches and old versions, and Ollama and Hugging Face models, each explained in plain language and labelled Safe, Review or Caution. Running apps, credentials, cloud drives and anything you add to Never Touch are left alone. Everything goes to the Trash, and History can put it back.</p>
+      <aside class="cta-box">
+        <h2>Or let ElfClean find them for you</h2>
+        <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Everything goes to the Trash first. Scanning is free.<span data-prelaunch> ElfClean is coming soon to the Mac App Store.</span></p>
+        <a class="button" href="mailto:csergay@gmail.com?subject=Tell%20me%20when%20ElfClean%20is%20out" data-store-href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_system_data_mac&amp;mt=12" data-store-label="Get ElfClean on the Mac App Store">Email me when it's out</a>
+      </aside>
+
+      <h2>More guides</h2>
+      <ul>
+        <li><a href="/delete-node-modules-mac">How to delete old node_modules folders on a Mac safely</a></li>
+        <li><a href="/remove-ollama-hugging-face-models">Where Ollama and Hugging Face store models on a Mac, and how to remove them</a></li>
+        <li><a href="/ai-coding-agents-disk-space">What Claude Code, Codex and Cursor leave on your Mac</a></li>
+        <li><a href="/clear-xcode-deriveddata">How to clear Xcode DerivedData, simulators and device support</a></li>
+        <li><a href="/find-large-files-duplicates-mac">How to find large files and duplicates on a Mac</a></li>
+        <li><a href="/docker-disk-space-mac">How to free up Docker disk space on a Mac</a></li>
+        <li><a href="/clear-developer-caches-mac">Clear pip, uv, Homebrew, Cargo and other caches on a Mac</a></li>
+        <li><a href="/mac-cleaner-for-developers">Mac cleaners for developers compared: CleanMyMac alternatives</a></li>
+      </ul>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <p><strong>ElfClean</strong> frees up space from AI tools and code on your Mac.</p>
+      <p>© 2026 Colin Sergay. Mac and Xcode are trademarks of Apple Inc. Other product names belong to their owners; ElfClean isn't affiliated with them.</p>
+    </div>
+    <div>
+      <h2>Guides</h2>
+      <ul>
+        <li><a href="/delete-node-modules-mac">node_modules</a></li>
+        <li><a href="/remove-ollama-hugging-face-models">Ollama and Hugging Face</a></li>
+        <li><a href="/ai-coding-agents-disk-space">Coding agents</a></li>
+        <li><a href="/clear-xcode-deriveddata">Xcode</a></li>
+        <li><a href="/system-data-mac">System Data</a></li>
+        <li><a href="/docker-disk-space-mac">Docker disk space</a></li>
+        <li><a href="/clear-developer-caches-mac">Developer caches</a></li>
+        <li><a href="/find-large-files-duplicates-mac">Large files and duplicates</a></li>
+        <li><a href="/mac-cleaner-for-developers">Cleaners compared</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>ElfClean</h2>
+      <ul>
+        <li><a href="/support">Support</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/press">Press kit</a></li>
+        <li><a href="/creators">For creators</a></li>
+        <li><a href="mailto:csergay@gmail.com?subject=ElfClean">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

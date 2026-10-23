@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to free up Docker disk space on a Mac | ElfClean</title>
+<meta name="description" content="Why Docker.raw looks huge, how to see what Docker really uses, and which docker system prune options are safe, with clear warnings about volumes.">
+<link rel="canonical" href="https://elfclean.app/docker-disk-space-mac">
+<meta name="theme-color" content="#f1f6f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#06110e" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ElfClean">
+<meta property="og:url" content="https://elfclean.app/docker-disk-space-mac">
+<meta property="og:title" content="How to free up Docker disk space on a Mac">
+<meta property="og:description" content="Why Docker.raw looks huge, how to see what Docker really uses, and which docker system prune options are safe, with clear warnings about volumes.">
+<meta property="og:image" content="https://elfclean.app/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://elfclean.app/assets/og-card.png">
+<link rel="icon" href="/assets/favicon-64.png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<!-- The shipped app and the App Store listing still link to enlitened.github.io/elfclean/; send
+     those visits to the same page here (the old root was the support page). -->
+<script>if (location.hostname.endsWith("github.io")) { var p = location.pathname.replace(/^\/elfclean\/?/, "").replace(/\.html$/, ""); location.replace("https://elfclean.app/" + (p === "" || p === "index" ? "support" : p) + location.hash); }</script>
+<link rel="preload" href="/assets/fonts/HankenGrotesk.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How to free up Docker disk space on a Mac",
+      "description": "Why Docker.raw looks huge, how to see what Docker really uses, and which docker system prune options are safe, with clear warnings about volumes.",
+      "datePublished": "2026-10-23",
+      "dateModified": "2026-10-23",
+      "mainEntityOfPage": "https://elfclean.app/docker-disk-space-mac",
+      "image": "https://elfclean.app/assets/og-card.png",
+      "author": {
+        "@type": "Person",
+        "name": "Colin Sergay"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Colin Sergay"
+      },
+      "about": {
+        "@id": "https://elfclean.app/#app"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ElfClean",
+          "item": "https://elfclean.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://elfclean.app/#guides"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Docker disk space",
+          "item": "https://elfclean.app/docker-disk-space-mac"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/apple-touch-icon.png" alt="" width="34" height="34">ElfClean</a>
+    <nav aria-label="Main">
+      <a class="optional" href="/#guides">Guides</a>
+      <a class="optional" href="/support">Support</a>
+      <a class="button small" href="mailto:csergay@gmail.com?subject=Tell%20me%20when%20ElfClean%20is%20out" data-store-href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_docker_disk_space_mac_nav&amp;mt=12" data-store-label="Mac App Store">Get notified</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="article">
+  <div class="narrow">
+      <p class="crumbs"><a href="/">ElfClean</a> / <a href="/#guides">Guides</a></p>
+      <h1>How to free up Docker disk space on a Mac</h1>
+      <p class="standfirst">Docker on a Mac runs inside a small Linux virtual machine, and every image, container, volume and build cache lives in that machine's disk image. Deleting files in Finder won't shrink it. Docker's own commands will, as long as you know which ones touch your data.</p>
+
+      <h2>Where Docker Desktop keeps its disk</h2>
+      <p>Docker Desktop stores everything in one file:</p>
+<pre><code>~/Library/Containers/com.docker.docker/Data/vms/0/data/Docker.raw</code></pre>
+      <p>It's a sparse file. Its stated size is the most it may grow to (the disk usage limit in Docker's settings), while the space it really takes is often much less. Finder and <code>ls</code> show the stated size, which is why <code>Docker.raw</code> so often looks huge. To see what it really uses:</p>
+<pre><code>cd ~/Library/Containers/com.docker.docker/Data/vms/0/data
+ls -lh Docker.raw   # the size it may grow to
+du -h Docker.raw    # the space it takes on your disk</code></pre>
+      <p class="note">Don't delete or move <code>Docker.raw</code> to save space. It holds every image, container and volume, including databases and anything else you've only stored in Docker. Use the commands below, or Docker Desktop's reset options, instead.</p>
+
+      <h2>See what's using the space</h2>
+      <p>With Docker running:</p>
+<pre><code>docker system df
+docker system df -v   # every image, container, volume and cache entry</code></pre>
+      <p>The summary has four rows: images, containers, local volumes and build cache, each with a "Reclaimable" column. That column is a good guide to what the prune commands below will free. Build cache is often the largest after a few months of <code>docker build</code>.</p>
+
+      <h2>What each prune command removes</h2>
+      <div class="table-scroll">
+      <table>
+        <thead><tr><th>Command</th><th>Removes</th><th>Risk</th></tr></thead>
+        <tbody>
+          <tr><td><code>docker builder prune</code></td><td>Dangling build cache. Add <code>--all</code> for all unused build cache.</td><td>Low. The next build is slower.</td></tr>
+          <tr><td><code>docker image prune</code></td><td>Dangling images (untagged layers left by rebuilds). Add <code>--all</code> for every image no container uses.</td><td>Low. Removed images are pulled or built again.</td></tr>
+          <tr><td><code>docker container prune</code></td><td>Stopped containers.</td><td>Files written inside a container, outside a volume, go with it.</td></tr>
+          <tr><td><code>docker system prune</code></td><td>Stopped containers, unused networks, dangling images and unused build cache.</td><td>As above.</td></tr>
+          <tr><td><code>docker system prune --all</code></td><td>The same, plus every image no container uses.</td><td>You'll pull or build images again.</td></tr>
+          <tr><td><code>docker system prune --volumes</code></td><td>The same, plus unused anonymous volumes.</td><td>Data in those volumes is gone.</td></tr>
+          <tr><td><code>docker volume prune --all</code></td><td>Every volume no container uses, named ones included.</td><td>High: this is where databases keep their data.</td></tr>
+        </tbody>
+      </table>
+      </div>
+      <p>Each command lists what it's about to do and asks before it removes anything, unless you add <code>-f</code>. Nothing goes to the Trash.</p>
+
+      <h2>A safe order to work in</h2>
+      <p>Start with what rebuilds itself:</p>
+<pre><code>docker builder prune --all
+docker image prune</code></pre>
+      <p>To keep recent cache and only clear the old, filter by age:</p>
+<pre><code>docker builder prune --all --filter until=168h   # older than a week</code></pre>
+      <p>Then stopped containers and images you no longer use. Check <code>docker ps -a</code> first: a stopped container may be one you meant to start again, with changes inside it that aren't in any image.</p>
+<pre><code>docker ps -a
+docker system prune --all</code></pre>
+
+      <h2>Be careful with volumes</h2>
+      <p>Volumes are where containers keep data meant to outlive them: Postgres and MySQL data directories, uploaded files, caches you might want back. A volume counts as "unused" whenever no container is attached to it, including when you've just run <code>docker compose down</code> and plan to bring the project up again tomorrow.</p>
+<pre><code>docker volume ls
+docker volume ls --filter dangling=true   # volumes no container uses</code></pre>
+      <p>Since Docker Engine 23, <code>docker system prune --volumes</code> and plain <code>docker volume prune</code> only remove anonymous volumes (the ones with long random names). Named volumes, such as <code>myapp_pgdata</code>, are only removed by <code>docker volume prune --all</code> or <code>docker volume rm</code>. Remove volumes by name when you're sure, rather than in bulk:</p>
+<pre><code>docker volume rm old-project_pgdata</code></pre>
+      <p class="note">If a volume holds the only copy of a database you care about, dump it first (for example with <code>pg_dump</code> run inside the container) and keep the dump outside Docker.</p>
+
+      <h2>Docker Desktop's own settings</h2>
+      <p>Two things in Docker Desktop are worth knowing:</p>
+      <ul>
+        <li><strong>Disk usage limit.</strong> In Settings, under Resources and then Advanced, you can set the most the disk image may grow to. Lowering it can mean Docker has to delete images to fit, so check what you'd lose first.</li>
+        <li><strong>Clean / Purge data.</strong> In the Troubleshoot screen (the bug icon), this deletes all of Docker's data: every image, container and volume. It's the right tool when you want to start again from nothing, and the wrong one otherwise.</li>
+      </ul>
+      <p>After pruning, <code>du</code> on <code>Docker.raw</code> should drop, though it can take a minute for Docker to hand the freed blocks back to macOS.</p>
+
+      <h2>Colima and OrbStack</h2>
+      <p>Other ways of running Docker on a Mac keep their disks elsewhere, but the same <code>docker</code> prune commands work against them, because they talk to the engine inside the virtual machine.</p>
+      <ul>
+        <li><strong>Colima</strong> keeps each machine in <code>~/.colima/_lima</code>, with the container data disk in <code>~/.colima/_lima/_disks</code>. <code>colima prune</code> clears only Colima's downloaded assets, not your containers. <code>colima delete</code> removes the whole machine and its settings, and <code>colima delete --data</code> removes the container data too.</li>
+        <li><strong>OrbStack</strong> keeps its data in a disk image inside <code>~/Library/Group Containers</code> (a folder whose name ends in <code>dev.orbstack</code>), with settings in <code>~/.orbstack</code>. Use <code>docker</code> commands, or OrbStack's own settings, rather than touching those files.</li>
+      </ul>
+
+      <h2>How ElfClean does it</h2>
+      <p>ElfClean doesn't clean Docker's disk image. It belongs to another app's protected container, and removing it would delete every container and volume at once, so ElfClean only measures it. On the AI &amp; coding screen, "Docker and virtual machine storage" lets you choose <code>Docker.raw</code> or another virtual machine disk and shows the space it takes on disk next to the most it may grow to, with a link to Docker's cleanup instructions.</p>
+      <p>The same screen has a "Reclaim with the tool's own command" section, which lists <code>docker system prune</code> for Docker, Colima and OrbStack, explains what it removes and that volumes stay unless you add <code>--volumes</code>, and has a button to copy it. ElfClean never runs these commands itself; you paste them into Terminal.</p>
+      <p>What it does clean are the caches around your projects, such as package downloads and build folders in projects you haven't touched for a while. Those go to the Trash, and History can put them back.</p>
+      <aside class="cta-box">
+        <h2>Or let ElfClean find them for you</h2>
+        <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Everything goes to the Trash first. Scanning is free.<span data-prelaunch> ElfClean is coming soon to the Mac App Store.</span></p>
+        <a class="button" href="mailto:csergay@gmail.com?subject=Tell%20me%20when%20ElfClean%20is%20out" data-store-href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_docker_disk_space_mac&amp;mt=12" data-store-label="Get ElfClean on the Mac App Store">Email me when it's out</a>
+      </aside>
+
+      <h2>More guides</h2>
+      <ul>
+        <li><a href="/delete-node-modules-mac">How to delete old node_modules folders on a Mac safely</a></li>
+        <li><a href="/remove-ollama-hugging-face-models">Where Ollama and Hugging Face store models on a Mac, and how to remove them</a></li>
+        <li><a href="/ai-coding-agents-disk-space">What Claude Code, Codex and Cursor leave on your Mac</a></li>
+        <li><a href="/clear-xcode-deriveddata">How to clear Xcode DerivedData, simulators and device support</a></li>
+        <li><a href="/system-data-mac">What System Data is on a Mac, and how to make it smaller</a></li>
+        <li><a href="/find-large-files-duplicates-mac">How to find large files and duplicates on a Mac</a></li>
+        <li><a href="/clear-developer-caches-mac">Clear pip, uv, Homebrew, Cargo and other caches on a Mac</a></li>
+        <li><a href="/mac-cleaner-for-developers">Mac cleaners for developers compared: CleanMyMac alternatives</a></li>
+      </ul>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <p><strong>ElfClean</strong> frees up space from AI tools and code on your Mac.</p>
+      <p>© 2026 Colin Sergay. Mac and Xcode are trademarks of Apple Inc. Other product names belong to their owners; ElfClean isn't affiliated with them.</p>
+    </div>
+    <div>
+      <h2>Guides</h2>
+      <ul>
+        <li><a href="/delete-node-modules-mac">node_modules</a></li>
+        <li><a href="/remove-ollama-hugging-face-models">Ollama and Hugging Face</a></li>
+        <li><a href="/ai-coding-agents-disk-space">Coding agents</a></li>
+        <li><a href="/clear-xcode-deriveddata">Xcode</a></li>
+        <li><a href="/system-data-mac">System Data</a></li>
+        <li><a href="/docker-disk-space-mac">Docker disk space</a></li>
+        <li><a href="/clear-developer-caches-mac">Developer caches</a></li>
+        <li><a href="/find-large-files-duplicates-mac">Large files and duplicates</a></li>
+        <li><a href="/mac-cleaner-for-developers">Cleaners compared</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>ElfClean</h2>
+      <ul>
+        <li><a href="/support">Support</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/press">Press kit</a></li>
+        <li><a href="/creators">For creators</a></li>
+        <li><a href="mailto:csergay@gmail.com?subject=ElfClean">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

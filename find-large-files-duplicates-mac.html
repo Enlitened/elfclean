@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to find large files and duplicates on a Mac | ElfClean</title>
+<meta name="description" content="Find the biggest files on your Mac with Finder, Storage settings and Terminal, and find true duplicates by checksum without downloading iCloud files.">
+<link rel="canonical" href="https://elfclean.app/find-large-files-duplicates-mac">
+<meta name="theme-color" content="#f1f6f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#06110e" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ElfClean">
+<meta property="og:url" content="https://elfclean.app/find-large-files-duplicates-mac">
+<meta property="og:title" content="How to find large files and duplicates on a Mac">
+<meta property="og:description" content="Find the biggest files on your Mac with Finder, Storage settings and Terminal, and find true duplicates by checksum without downloading iCloud files.">
+<meta property="og:image" content="https://elfclean.app/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://elfclean.app/assets/og-card.png">
+<link rel="icon" href="/assets/favicon-64.png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<!-- The shipped app and the App Store listing still link to enlitened.github.io/elfclean/; send
+     those visits to the same page here (the old root was the support page). -->
+<script>if (location.hostname.endsWith("github.io")) { var p = location.pathname.replace(/^\/elfclean\/?/, "").replace(/\.html$/, ""); location.replace("https://elfclean.app/" + (p === "" || p === "index" ? "support" : p) + location.hash); }</script>
+<link rel="preload" href="/assets/fonts/HankenGrotesk.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How to find large files and duplicates on a Mac",
+      "description": "Find the biggest files on your Mac with Finder, Storage settings and Terminal, and find true duplicates by checksum without downloading iCloud files.",
+      "datePublished": "2026-10-23",
+      "dateModified": "2026-10-23",
+      "mainEntityOfPage": "https://elfclean.app/find-large-files-duplicates-mac",
+      "image": "https://elfclean.app/assets/og-card.png",
+      "author": {
+        "@type": "Person",
+        "name": "Colin Sergay"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Colin Sergay"
+      },
+      "about": {
+        "@id": "https://elfclean.app/#app"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ElfClean",
+          "item": "https://elfclean.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://elfclean.app/#guides"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Large files and duplicates",
+          "item": "https://elfclean.app/find-large-files-duplicates-mac"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/apple-touch-icon.png" alt="" width="34" height="34">ElfClean</a>
+    <nav aria-label="Main">
+      <a class="optional" href="/#guides">Guides</a>
+      <a class="optional" href="/support">Support</a>
+      <a class="button small" href="mailto:csergay@gmail.com?subject=Tell%20me%20when%20ElfClean%20is%20out" data-store-href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_find_large_files_duplicates_mac_nav&amp;mt=12" data-store-label="Mac App Store">Get notified</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="article">
+  <div class="narrow">
+      <p class="crumbs"><a href="/">ElfClean</a> / <a href="/#guides">Guides</a></p>
+      <h1>How to find large files and duplicates on a Mac</h1>
+      <p class="standfirst">A handful of forgotten videos, disk images and archives often take more space than everything else in your home folder put together. macOS can find them for you, in Finder, in Storage settings or in Terminal. Duplicates take more care: two files with the same name aren't necessarily the same, and two different names can be the same file.</p>
+
+      <h2>Find large files in Finder</h2>
+      <ol>
+        <li>Open a Finder window, select your home folder, and press Command-F.</li>
+        <li>Click the search location next to "Search:" and choose your home folder rather than This Mac.</li>
+        <li>Click the first criterion (usually Kind), choose Other, tick File Size and click OK.</li>
+        <li>Set it to "is greater than" 1 GB (or 500 MB for a fuller list).</li>
+        <li>Switch to list view (Command-2) and click the Size column to sort.</li>
+      </ol>
+      <p>Choose File, then Save to keep the search in Finder's sidebar for next time. Finder's search uses Spotlight, so it skips folders Spotlight doesn't index, and it doesn't look inside packages such as app bundles or Photos libraries.</p>
+      <p>To see which folders are large rather than which files, turn on View, then Show View Options, then Calculate All Sizes in list view. It's slow on big folders, but it works.</p>
+
+      <h2>Use Storage settings</h2>
+      <p>Open System Settings, then General, then Storage, and click the information button next to Documents. The Large Files view lists your biggest files with their size and when you last opened them, and you can delete from there. Downloads shows the same for your Downloads folder, and File Browser lets you open folders by size.</p>
+      <p>Be careful: deleting from these views removes the file straight away, without going through the Trash. If you're not certain, use Show in Finder and move it to the Trash yourself.</p>
+
+      <h2>Find large files in Terminal</h2>
+      <p>Every file over 1 GB in your home folder, smallest first, with the space each takes on disk:</p>
+<pre><code>find ~ -type f -size +1G -not -flags +dataless -print0 2&gt;/dev/null | xargs -0 du -h | sort -h</code></pre>
+      <p><code>-not -flags +dataless</code> leaves out iCloud files that aren't downloaded (more on those below). <code>2&gt;/dev/null</code> hides "Operation not permitted" for folders macOS keeps private. The first run may ask whether Terminal can open your Desktop, Documents and Downloads.</p>
+      <p>Two numbers can disagree here. <code>find -size</code> uses a file's stated length, while <code>du</code> shows the space it really takes. Sparse files, such as virtual machine disks, can be many gigabytes long and take very little, so a file can show up in the list with a small size beside it.</p>
+      <p>To find the biggest folders instead, one level at a time:</p>
+<pre><code>du -h -d 1 ~ 2&gt;/dev/null | sort -h | tail -15</code></pre>
+      <p>Then repeat it on whichever folder is at the bottom, for example <code>du -h -d 1 ~/Movies</code>.</p>
+      <p>Spotlight can answer the same question almost instantly, because it already knows every indexed file's size:</p>
+<pre><code>mdfind -onlyin ~ 'kMDItemFSSize &gt; 1000000000'</code></pre>
+      <p>The size is in bytes, so <code>1000000000</code> is 1 GB. Spotlight leaves out folders it doesn't index, and it includes some packages (such as Xcode archives and apps) as single items.</p>
+
+      <h2>Before you delete a large file</h2>
+      <ul>
+        <li><strong>It's probably not a cache.</strong> Large files in your own folders are usually things you made or downloaded: videos, disk images, archives, exported projects. Nothing re-creates them.</li>
+        <li><strong>Check you have another copy</strong> if it matters: a backup, the original download, or a copy in cloud storage you've confirmed is complete.</li>
+        <li><strong>Leave app libraries alone.</strong> Photos, Music, Final Cut and Logic keep their media in libraries. Remove items from inside the app, never by opening the library in Finder.</li>
+        <li><strong>Disk images (.dmg) in Downloads</strong> are usually installers you've already used and can be downloaded again.</li>
+      </ul>
+
+      <h2>Find duplicate files</h2>
+      <p>Matching names or sizes isn't enough to call two files duplicates. The reliable test is to compare their contents, and the practical way to do that is a checksum: <code>shasum</code> reads every byte of a file and produces a short fingerprint. Two files with the same SHA-256 fingerprint have the same contents.</p>
+      <p>This lists files of 1 MB or more in your Downloads folder that have an identical twin, grouped, with a blank line between groups:</p>
+<pre><code>find ~/Downloads -type f -size +1M -not -flags +dataless -print0 2&gt;/dev/null \
+  | xargs -0 shasum -a 256 \
+  | sort \
+  | awk '{ h = $1 } n[h]++ == 0 { first[h] = $0; next } n[h] == 2 { print ""; print first[h] } { print }'</code></pre>
+      <p>Each line is the fingerprint followed by the file's path. Point it at one folder at a time rather than your whole home folder: it reads every file in full, so a large folder takes a long time. Skipping files under 1 MB keeps it quick and leaves out the small files that free little space.</p>
+      <p>Before removing a copy, check what it's for. A duplicate inside a project, an app's data folder or a library may be the copy something depends on, and deleting it breaks that thing even though the other copy survives. The safe ones to clear are usually in Downloads, on the Desktop and in folders of exports.</p>
+
+      <h3>Copies that don't take any extra space</h3>
+      <p>On APFS, when you duplicate a file in Finder (Command-D) or copy it within the same disk, macOS may make a clone: both files share the same storage until one is changed. A checksum shows them as duplicates, but deleting one frees almost nothing. There's no simple Terminal command to tell a clone from a real copy; if removing a "duplicate" didn't change your free space, that's the likely reason.</p>
+
+      <h2>Watch out for iCloud and Photos</h2>
+      <p>If you use iCloud Drive with Optimise Mac Storage, or sync your Desktop and Documents folders, some files on your Mac are only placeholders: the name and size are there, but the contents are in iCloud. Finder shows a cloud icon beside them, and <code>ls -l%</code> marks them with a <code>%</code>.</p>
+      <ul>
+        <li>They appear in size searches, but deleting one frees nothing on your Mac, and deletes it from iCloud and your other devices too.</li>
+        <li>Reading one, for example with <code>shasum</code>, downloads it. That's why both commands above skip them with <code>-not -flags +dataless</code>.</li>
+      </ul>
+      <p>Photos keeps its originals inside <code>Photos Library.photoslibrary</code> in your Pictures folder. Never delete files from inside it: Photos' database still expects them, and the library can be damaged. To find duplicate photos, use the Duplicates album under Utilities in the Photos sidebar, which merges them properly. Music libraries work the same way.</p>
+      <p class="note">Deleting from Terminal with <code>rm</code> skips the Trash. When you're clearing out files you found with these commands, move them to the Trash in Finder, and empty it once you're sure.</p>
+
+      <h2>How ElfClean does it</h2>
+      <p>ElfClean's Files screen has two lists. Largest lists the biggest files in your home folder, from the size you choose in Settings (250 MB to 5 GB), with filters for videos, images, documents and archives. Duplicates compares files of 1 MB or more by their contents, on your Mac, and groups the copies. Nothing is read until you click Find. Quick Look shows any file before you decide.</p>
+      <p>Both lists leave out Library, the Trash, Photos and Music libraries, apps, Git data, files kept in iCloud and anything you add to Never Touch. Copies that already share their space on disk aren't listed, because removing them frees nothing. Each large file is ticked on its own, one copy of every duplicate always stays, and the copy being removed is checked again just before it goes. Everything goes to the Trash, and History can put it back.</p>
+      <figure class="screen">
+        <picture>
+          <source srcset="/assets/shots/storage-map-dark.webp" media="(prefers-color-scheme: dark)">
+          <img src="/assets/shots/storage-map-light.webp" width="1600" height="949" alt="ElfClean's storage map of the home folder, with folders sized by the space they use." loading="lazy">
+        </picture>
+      </figure>
+      <aside class="cta-box">
+        <h2>Or let ElfClean find them for you</h2>
+        <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Everything goes to the Trash first. Scanning is free.<span data-prelaunch> ElfClean is coming soon to the Mac App Store.</span></p>
+        <a class="button" href="mailto:csergay@gmail.com?subject=Tell%20me%20when%20ElfClean%20is%20out" data-store-href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_find_large_files_duplicates_mac&amp;mt=12" data-store-label="Get ElfClean on the Mac App Store">Email me when it's out</a>
+      </aside>
+
+      <h2>More guides</h2>
+      <ul>
+        <li><a href="/delete-node-modules-mac">How to delete old node_modules folders on a Mac safely</a></li>
+        <li><a href="/remove-ollama-hugging-face-models">Where Ollama and Hugging Face store models on a Mac, and how to remove them</a></li>
+        <li><a href="/ai-coding-agents-disk-space">What Claude Code, Codex and Cursor leave on your Mac</a></li>
+        <li><a href="/clear-xcode-deriveddata">How to clear Xcode DerivedData, simulators and device support</a></li>
+        <li><a href="/system-data-mac">What System Data is on a Mac, and how to make it smaller</a></li>
+        <li><a href="/docker-disk-space-mac">How to free up Docker disk space on a Mac</a></li>
+        <li><a href="/clear-developer-caches-mac">Clear pip, uv, Homebrew, Cargo and other caches on a Mac</a></li>
+        <li><a href="/mac-cleaner-for-developers">Mac cleaners for developers compared: CleanMyMac alternatives</a></li>
+      </ul>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <p><strong>ElfClean</strong> frees up space from AI tools and code on your Mac.</p>
+      <p>© 2026 Colin Sergay. Mac and Xcode are trademarks of Apple Inc. Other product names belong to their owners; ElfClean isn't affiliated with them.</p>
+    </div>
+    <div>
+      <h2>Guides</h2>
+      <ul>
+        <li><a href="/delete-node-modules-mac">node_modules</a></li>
+        <li><a href="/remove-ollama-hugging-face-models">Ollama and Hugging Face</a></li>
+        <li><a href="/ai-coding-agents-disk-space">Coding agents</a></li>
+        <li><a href="/clear-xcode-deriveddata">Xcode</a></li>
+        <li><a href="/system-data-mac">System Data</a></li>
+        <li><a href="/docker-disk-space-mac">Docker disk space</a></li>
+        <li><a href="/clear-developer-caches-mac">Developer caches</a></li>
+        <li><a href="/find-large-files-duplicates-mac">Large files and duplicates</a></li>
+        <li><a href="/mac-cleaner-for-developers">Cleaners compared</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>ElfClean</h2>
+      <ul>
+        <li><a href="/support">Support</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/press">Press kit</a></li>
+        <li><a href="/creators">For creators</a></li>
+        <li><a href="mailto:csergay@gmail.com?subject=ElfClean">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
