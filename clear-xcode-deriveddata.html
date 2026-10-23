@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to clear Xcode DerivedData, simulators and device support | ElfClean</title>
+<meta name="description" content="Xcode can use tens of gigabytes. What DerivedData, device support, simulators and archives are, which are safe to delete on a Mac, and the commands to do it.">
+<link rel="canonical" href="https://elfclean.app/clear-xcode-deriveddata">
+<meta name="theme-color" content="#f1f6f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#06110e" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="ElfClean">
+<meta property="og:url" content="https://elfclean.app/clear-xcode-deriveddata">
+<meta property="og:title" content="How to clear Xcode DerivedData, simulators and device support">
+<meta property="og:description" content="Xcode can use tens of gigabytes. What DerivedData, device support, simulators and archives are, which are safe to delete on a Mac, and the commands to do it.">
+<meta property="og:image" content="https://elfclean.app/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://elfclean.app/assets/og-card.png">
+<link rel="icon" href="/assets/favicon-64.png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<!-- The shipped app and the App Store listing still link to enlitened.github.io/elfclean/; send
+     those visits to the same page here (the old root was the support page). -->
+<script>if (location.hostname.endsWith("github.io")) { var p = location.pathname.replace(/^\/elfclean\/?/, "").replace(/\.html$/, ""); location.replace("https://elfclean.app/" + (p === "" || p === "index" ? "support" : p) + location.hash); }</script>
+<link rel="preload" href="/assets/fonts/HankenGrotesk.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "How to clear Xcode DerivedData, simulators and device support",
+      "description": "Xcode can use tens of gigabytes. What DerivedData, device support, simulators and archives are, which are safe to delete on a Mac, and the commands to do it.",
+      "datePublished": "2026-10-23",
+      "dateModified": "2026-10-23",
+      "mainEntityOfPage": "https://elfclean.app/clear-xcode-deriveddata",
+      "image": "https://elfclean.app/assets/og-card.png",
+      "author": {
+        "@type": "Person",
+        "name": "Colin Sergay"
+      },
+      "publisher": {
+        "@type": "Person",
+        "name": "Colin Sergay"
+      },
+      "about": {
+        "@id": "https://elfclean.app/#app"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ElfClean",
+          "item": "https://elfclean.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://elfclean.app/#guides"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Xcode",
+          "item": "https://elfclean.app/clear-xcode-deriveddata"
+        }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/apple-touch-icon.png" alt="" width="34" height="34">ElfClean</a>
+    <nav aria-label="Main">
+      <a class="optional" href="/#guides">Guides</a>
+      <a class="optional" href="/support">Support</a>
+      <a class="button small" href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_clear_xcode_deriveddata_nav&amp;mt=12">Mac App Store</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="article">
+  <div class="narrow">
+      <p class="crumbs"><a href="/">ElfClean</a> / <a href="/#guides">Guides</a></p>
+      <h1>How to clear Xcode DerivedData, simulators and device support</h1>
+      <p class="standfirst">Xcode is one of the biggest users of space on a developer's Mac, and most of it is in <code>~/Library/Developer</code>. Some of it rebuilds itself and can go any time; some of it is your only copy. Here's which is which.</p>
+
+      <div class="table-scroll">
+      <table>
+        <thead><tr><th>Folder</th><th>What it is</th><th>Safe to remove?</th></tr></thead>
+        <tbody>
+          <tr><td>DerivedData</td><td>Build products, indexes and logs for every project you've built.</td><td>Yes. The next build starts from scratch and takes longer.</td></tr>
+          <tr><td>Device support</td><td>Debug symbols copied from each iPhone, Watch or other device you connected, per system version.</td><td>Old versions, yes. Xcode copies them again when you debug on that device.</td></tr>
+          <tr><td>Simulator devices</td><td>Each simulated device, with the apps and data on it.</td><td>Careful: the device and its data are gone. Xcode can make a new, empty one.</td></tr>
+          <tr><td>Simulator caches</td><td>Caches the simulator service rebuilds.</td><td>Yes.</td></tr>
+          <tr><td>Archives</td><td>Builds you archived to submit, with their debug symbols.</td><td>Keep the ones you've shipped: without them you can't read those versions' crash reports.</td></tr>
+          <tr><td>SwiftUI previews</td><td>The devices previews run on.</td><td>Yes. Made again the next time you preview.</td></tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h2>DerivedData</h2>
+      <p>Quit Xcode first, then:</p>
+<pre><code>du -sh ~/Library/Developer/Xcode/DerivedData
+rm -rf ~/Library/Developer/Xcode/DerivedData/*</code></pre>
+      <p>Each project has its own folder in there, named after the project with a hash, so you can also remove just the ones for projects you no longer build. Projects that set a custom DerivedData location in their workspace settings or build scripts keep it inside the project instead.</p>
+
+      <h2>Device support</h2>
+<pre><code>du -sh ~/Library/Developer/Xcode/*DeviceSupport/*</code></pre>
+      <p>There's one folder per platform (<code>iOS DeviceSupport</code>, <code>watchOS DeviceSupport</code> and so on) and one subfolder per system version. Versions you no longer have on any device can go. If you connect a device with that version again, Xcode copies the symbols back, which can take several minutes.</p>
+
+      <h2>Simulators</h2>
+      <p>List devices and delete the ones Xcode can no longer run:</p>
+<pre><code>xcrun simctl list devices
+xcrun simctl delete unavailable</code></pre>
+      <p>Simulator runtimes, which are several gigabytes each, are managed separately:</p>
+<pre><code>xcrun simctl runtime list
+xcrun simctl runtime delete &lt;runtime-id&gt;</code></pre>
+      <p>Or open Xcode's Settings, choose Components, and remove the platforms you don't develop for. Before deleting a device, remember it holds whatever apps and test data you put on it.</p>
+
+      <h2>Archives</h2>
+      <p>Archives live in <code>~/Library/Developer/Xcode/Archives</code>, one folder per day. In Xcode's Organizer you can see which are which. Each holds the debug symbols (dSYMs) for that build; without them, crash reports from that release can't be read, and rebuilding the same commit later doesn't give identical symbols. Delete archives of builds that never shipped; keep, or back up, the ones that did.</p>
+
+      <h2>How ElfClean does it</h2>
+      <p>ElfClean finds DerivedData, archives, device support unused for 90 days, simulator caches and devices (with the runtime each uses), preview devices and Xcode's own caches. It also finds DerivedData kept inside projects you haven't touched for a while, plus the package caches for Swift packages, CocoaPods and Homebrew.</p>
+      <p>DerivedData and caches are marked as rebuilding themselves. Archives and simulator devices are marked as possibly your only copy, so they wait for your decision. Everything goes to the Trash, and History can put it back.</p>
+      <aside class="cta-box">
+        <h2>Or let ElfClean find them for you</h2>
+        <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Everything goes to the Trash first. Scanning is free.</p>
+        <a class="button" href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_clear_xcode_deriveddata&amp;mt=12">Get ElfClean on the Mac App Store</a>
+      </aside>
+
+      <h2>More guides</h2>
+      <ul>
+        <li><a href="/delete-node-modules-mac">How to delete old node_modules folders on a Mac safely</a></li>
+        <li><a href="/remove-ollama-hugging-face-models">Where Ollama and Hugging Face store models on a Mac, and how to remove them</a></li>
+        <li><a href="/ai-coding-agents-disk-space">What Claude Code, Codex and Cursor leave on your Mac</a></li>
+      </ul>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <p><strong>ElfClean</strong> frees up space from AI tools and code on your Mac.</p>
+      <p>© 2026 Colin Sergay. Mac and Xcode are trademarks of Apple Inc. Other product names belong to their owners; ElfClean isn't affiliated with them.</p>
+    </div>
+    <div>
+      <h2>Guides</h2>
+      <ul>
+        <li><a href="/delete-node-modules-mac">node_modules</a></li>
+        <li><a href="/remove-ollama-hugging-face-models">Ollama and Hugging Face</a></li>
+        <li><a href="/ai-coding-agents-disk-space">Coding agents</a></li>
+        <li><a href="/clear-xcode-deriveddata">Xcode</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>ElfClean</h2>
+      <ul>
+        <li><a href="/support">Support</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="mailto:csergay@gmail.com?subject=ElfClean">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

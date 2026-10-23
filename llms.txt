@@ -1,0 +1,16 @@
+# ElfClean
+
+> ElfClean is a Mac app (macOS 15 or later, Mac App Store) that finds disk space left behind by AI coding tools, local AI models, project build folders and developer caches, explains each item in plain language and moves nothing until the user has reviewed it. Items go to the Trash and History can put them back. Free to scan; one in-app purchase unlocks cleaning several items at once; no subscription, no accounts, no telemetry. Made by Colin Sergay, an independent developer.
+
+ElfClean covers: Claude Code, Codex, Cursor, Devin (formerly Windsurf), VS Code, Roo Code, Aider and Continue (caches, logs, old versions, superseded extensions, conversation history, Git worktrees); Ollama and Hugging Face models (shared files counted once); node_modules, .next, build folders, Rust target and virtual environments in projects untouched for a while; Xcode DerivedData, archives, device support and simulators; package caches for npm, pnpm, Yarn, Bun, pip, uv, Poetry, Cargo, Go, Gradle, CocoaPods, Swift packages and Homebrew; app caches, logs, old downloads and leftovers from deleted apps. Projects with uncommitted or unpushed Git work are marked At risk and never ticked automatically. It does not claim to speed up a Mac.
+
+## Pages
+
+- [Home](https://elfclean.app/): what ElfClean finds and how it keeps work safe
+- [How to delete old node_modules on a Mac](https://elfclean.app/delete-node-modules-mac)
+- [Where Ollama and Hugging Face keep models on a Mac](https://elfclean.app/remove-ollama-hugging-face-models)
+- [What Claude Code, Codex and Cursor leave on your Mac](https://elfclean.app/ai-coding-agents-disk-space)
+- [How to clear Xcode DerivedData, simulators and device support](https://elfclean.app/clear-xcode-deriveddata)
+- [Support](https://elfclean.app/support)
+- [Privacy policy](https://elfclean.app/privacy)
+- [Mac App Store](https://apps.apple.com/app/id6819001057)

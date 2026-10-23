@@ -3,19 +3,47 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ElfClean Privacy</title>
-<meta name="description" content="ElfClean privacy policy: no accounts, no analytics, no data collected.">
-<link rel="stylesheet" href="style.css">
+<title>ElfClean privacy policy | ElfClean</title>
+<meta name="description" content="ElfClean collects no data: no accounts, analytics, tracking or telemetry. What the app reads on your Mac and what stays there.">
+<link rel="canonical" href="https://elfclean.app/privacy">
+<meta name="theme-color" content="#f1f6f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#06110e" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ElfClean">
+<meta property="og:url" content="https://elfclean.app/privacy">
+<meta property="og:title" content="ElfClean privacy policy">
+<meta property="og:description" content="ElfClean collects no data: no accounts, analytics, tracking or telemetry. What the app reads on your Mac and what stays there.">
+<meta property="og:image" content="https://elfclean.app/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://elfclean.app/assets/og-card.png">
+<link rel="icon" href="/assets/favicon-64.png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<!-- The shipped app and the App Store listing still link to enlitened.github.io/elfclean/; send
+     those visits to the same page here (the old root was the support page). -->
+<script>if (location.hostname.endsWith("github.io")) { var p = location.pathname.replace(/^\/elfclean\/?/, "").replace(/\.html$/, ""); location.replace("https://elfclean.app/" + (p === "" || p === "index" ? "support" : p) + location.hash); }</script>
+<link rel="preload" href="/assets/fonts/HankenGrotesk.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<main>
-<header>
-  <a class="brand" href="./">ELF ✦ CLEAN</a>
-  <nav><a href="./">Support</a><a href="privacy.html">Privacy</a></nav>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/apple-touch-icon.png" alt="" width="34" height="34">ElfClean</a>
+    <nav aria-label="Main">
+      <a class="optional" href="/#guides">Guides</a>
+      <a class="optional" href="/support">Support</a>
+      <a class="button small" href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_privacy_nav&amp;mt=12">Mac App Store</a>
+    </nav>
+  </div>
 </header>
 
+<main id="main" class="article">
+  <div class="narrow">
+<p class="crumbs"><a href="/">ElfClean</a></p>
 <h1>Privacy policy</h1>
-<p class="muted">Effective 16 October 2026</p>
+<p class="standfirst">Effective 16 October 2026</p>
 
 <h2>The short version</h2>
 <p>ElfClean does not collect any data. There are no accounts, analytics, tracking, advertising or telemetry, and ElfClean operates no servers.</p>
@@ -33,10 +61,38 @@
 <p>Notifications and launch at login are optional and controlled by macOS. They never enable background deletion or send file information anywhere.</p>
 <p>If you use the ElfClean shortcuts in Shortcuts or Siri, "Get Reclaimable Space" returns the last scan's total and your disk's free space to that shortcut, and "Get ElfClean Report" returns the open scan's findings (sections, sizes and local paths) as text or JSON to that shortcut, on your Mac. What the shortcut does with them next is up to the shortcut you run. ElfClean sends nothing anywhere.</p>
 
+<h2>This website</h2>
+<p>elfclean.app sets no cookies and runs no analytics, advertising or tracking scripts, and loads nothing from other sites. It is hosted by Vercel, which keeps standard server logs (such as IP addresses and the pages requested) to run and protect the service. Links to the App Store carry a campaign name so Apple's App Analytics can count, in aggregate, how many downloads came from this site; Apple's privacy policy covers the App Store.</p>
+
 <h2>Contact</h2>
 <p>Questions about privacy: <a href="mailto:csergay@gmail.com?subject=ElfClean%20privacy">csergay@gmail.com</a></p>
-
-<footer>© 2026 Colin Sergay · <a href="./">Support</a></footer>
+  </div>
 </main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <p><strong>ElfClean</strong> frees up space from AI tools and code on your Mac.</p>
+      <p>© 2026 Colin Sergay. Mac and Xcode are trademarks of Apple Inc. Other product names belong to their owners; ElfClean isn't affiliated with them.</p>
+    </div>
+    <div>
+      <h2>Guides</h2>
+      <ul>
+        <li><a href="/delete-node-modules-mac">node_modules</a></li>
+        <li><a href="/remove-ollama-hugging-face-models">Ollama and Hugging Face</a></li>
+        <li><a href="/ai-coding-agents-disk-space">Coding agents</a></li>
+        <li><a href="/clear-xcode-deriveddata">Xcode</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>ElfClean</h2>
+      <ul>
+        <li><a href="/support">Support</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="mailto:csergay@gmail.com?subject=ElfClean">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

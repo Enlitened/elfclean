@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ElfClean support | ElfClean</title>
+<meta name="description" content="Help with ElfClean for Mac: getting started, what the Safe, Review and Caution labels mean, getting files back from the Trash, and how to contact the developer.">
+<link rel="canonical" href="https://elfclean.app/support">
+<meta name="theme-color" content="#f1f6f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#06110e" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ElfClean">
+<meta property="og:url" content="https://elfclean.app/support">
+<meta property="og:title" content="ElfClean support">
+<meta property="og:description" content="Help with ElfClean for Mac: getting started, what the Safe, Review and Caution labels mean, getting files back from the Trash, and how to contact the developer.">
+<meta property="og:image" content="https://elfclean.app/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://elfclean.app/assets/og-card.png">
+<link rel="icon" href="/assets/favicon-64.png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<!-- The shipped app and the App Store listing still link to enlitened.github.io/elfclean/; send
+     those visits to the same page here (the old root was the support page). -->
+<script>if (location.hostname.endsWith("github.io")) { var p = location.pathname.replace(/^\/elfclean\/?/, "").replace(/\.html$/, ""); location.replace("https://elfclean.app/" + (p === "" || p === "index" ? "support" : p) + location.hash); }</script>
+<link rel="preload" href="/assets/fonts/HankenGrotesk.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/apple-touch-icon.png" alt="" width="34" height="34">ElfClean</a>
+    <nav aria-label="Main">
+      <a class="optional" href="/#guides">Guides</a>
+      <a class="optional" href="/support" aria-current="page">Support</a>
+      <a class="button small" href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_support_nav&amp;mt=12">Mac App Store</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="article">
+  <div class="narrow">
+<p class="crumbs"><a href="/">ElfClean</a></p>
+<h1>ElfClean support</h1>
+<p class="standfirst">ElfClean shows what is using space in your home folder and helps you remove what can safely go: caches, logs, old downloads, Xcode and package-manager files, project build folders, coding-agent leftovers and local AI models. It's built for developers, people who build with AI, and anyone running AI tools on their Mac.</p>
+
+<div class="cta-box">
+  <strong>Contact:</strong> <a href="mailto:csergay@gmail.com?subject=ElfClean%20support">csergay@gmail.com</a><br>
+  <span class="meta">Please include your macOS and ElfClean versions (Settings → About), the screen you were on and the exact message shown. Leave out private file names and contents.</span>
+</div>
+
+<h2>Getting started</h2>
+<p>Grant access to your home folder, choose Everyday or Developer mode, and run a scan. Scanning only reads; nothing is removed until you review and confirm. Developer mode can also look inside the project folders you choose for build folders such as <code>node_modules</code>.</p>
+
+<h2>What the labels mean</h2>
+<ul>
+  <li><strong>Safe</strong>: rebuilds itself when needed (caches, build files).</li>
+  <li><strong>Review</strong>: look before choosing (old downloads, leftovers from deleted apps).</li>
+  <li><strong>Caution</strong>: may be your only copy (agent history, worktrees, archives). Choose these individually, or acknowledge the listed items in the review. Large files and repositories with something to lose always need an individual choice.</li>
+</ul>
+<p>Storage shows measured coverage of your home folder, not the whole disk.</p>
+
+<h2>Getting things back</h2>
+<p>Items move to the Trash by default. Space is freed when you empty the Trash. To undo, open History, select the entry and choose Restore…: ElfClean puts it back where it came from while it is still in the Trash (if a later cleanup reused its Trash name, History says so instead). You can also choose Reveal in Trash and drag it back yourself. macOS doesn't offer Finder's Put Back for items an App Store app moved to the Trash, so History is where the original location is kept. Once the Trash is emptied, items can't be recovered.</p>
+
+<h2>Keep and Never touch</h2>
+<p>Keep leaves a file, folder or project out of future scans; Undo reverses it right away. Manage the full list under Settings → Folders → Never touch.</p>
+
+<h2>Removing an app</h2>
+<p>On the Apps screen, choose an app (or drop it in). macOS asks you to grant access to that one app. Its optional cache and saved state start unticked. Apple and system apps, running apps and shared or ambiguous data are left alone.</p>
+
+<h2>What's free</h2>
+<p>All scans, previews, Storage and History are free, and so are cleaning one item at a time and removing an app with its data. A one-time purchase unlocks cleaning several items at once. There is no subscription. Use <em>Restore purchase</em> with the Apple Account that bought it.</p>
+
+<h2>Menu bar, schedules and alerts</h2>
+<p>All optional. Scheduled scans run only while ElfClean is running and never remove anything by themselves. Low-space alerts stay quiet until space recovers.</p>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <p><strong>ElfClean</strong> frees up space from AI tools and code on your Mac.</p>
+      <p>© 2026 Colin Sergay. Mac and Xcode are trademarks of Apple Inc. Other product names belong to their owners; ElfClean isn't affiliated with them.</p>
+    </div>
+    <div>
+      <h2>Guides</h2>
+      <ul>
+        <li><a href="/delete-node-modules-mac">node_modules</a></li>
+        <li><a href="/remove-ollama-hugging-face-models">Ollama and Hugging Face</a></li>
+        <li><a href="/ai-coding-agents-disk-space">Coding agents</a></li>
+        <li><a href="/clear-xcode-deriveddata">Xcode</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>ElfClean</h2>
+      <ul>
+        <li><a href="/support">Support</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="mailto:csergay@gmail.com?subject=ElfClean">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

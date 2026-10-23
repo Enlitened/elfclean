@@ -3,52 +3,303 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ElfClean Support</title>
-<meta name="description" content="Help and support for ElfClean, the careful storage cleaner for Mac users and developers.">
-<link rel="stylesheet" href="style.css">
+<title>ElfClean: free up Mac space from AI tools, node_modules and Xcode</title>
+<meta name="description" content="A Mac cleaner for people who build with AI. Find the space Claude Code, Codex, Cursor, Ollama models, old node_modules and Xcode left behind, review every item, and get it back from the Trash. No subscription.">
+<link rel="canonical" href="https://elfclean.app/">
+<meta name="theme-color" content="#f1f6f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#06110e" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ElfClean">
+<meta property="og:url" content="https://elfclean.app/">
+<meta property="og:title" content="ElfClean: find the space AI and code left on your Mac">
+<meta property="og:description" content="node_modules, agent worktrees, local models, Xcode builds. Review every item first; everything goes to the Trash. One purchase, no subscription.">
+<meta property="og:image" content="https://elfclean.app/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ElfClean's gauge showing the space a scan found on a Mac">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://elfclean.app/assets/og-card.png">
+<link rel="icon" href="/assets/favicon-64.png" sizes="64x64">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<!-- The shipped app and the App Store listing still link to enlitened.github.io/elfclean/; send
+     those visits to the same page here (the old root was the support page). -->
+<script>if (location.hostname.endsWith("github.io")) { var p = location.pathname.replace(/^\/elfclean\/?/, "").replace(/\.html$/, ""); location.replace("https://elfclean.app/" + (p === "" || p === "index" ? "support" : p) + location.hash); }</script>
+<link rel="preload" href="/assets/fonts/HankenGrotesk.ttf" as="font" type="font/ttf" crossorigin>
+<link rel="stylesheet" href="/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://elfclean.app/#app",
+      "name": "ElfClean",
+      "alternateName": "ElfClean: Free up space from AI & code",
+      "description": "A Mac app that finds the disk space AI coding tools, local models, project build folders and developer caches leave behind, explains each item in plain language and moves nothing until you have reviewed it.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "macOS 15 or later",
+      "url": "https://elfclean.app/",
+      "image": "https://elfclean.app/assets/icon-1024.png",
+      "screenshot": "https://elfclean.app/assets/shots/clean-light.webp",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free to scan; one in-app purchase unlocks cleaning several items at once." },
+      "author": { "@type": "Person", "name": "Colin Sergay", "email": "csergay@gmail.com" },
+      "installUrl": "https://apps.apple.com/app/id6819001057"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://elfclean.app/#site",
+      "url": "https://elfclean.app/",
+      "name": "ElfClean"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Will ElfClean delete anything without asking?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Scanning only reads. Nothing moves until you have reviewed it and confirmed. Items go to the Trash by default, and History can put them back while they are still there." } },
+        { "@type": "Question", "name": "Is it safe to delete node_modules on a Mac?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Usually: npm, pnpm, Yarn or Bun install it again from your lockfile. ElfClean offers node_modules only in projects you haven't touched for a while, leaves recent ones unticked, and marks projects with uncommitted or unpushed work as At risk." } },
+        { "@type": "Question", "name": "Which AI tools does ElfClean know about?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Claude Code, Codex, Cursor, Devin (formerly Windsurf), VS Code, Roo Code, Aider and Continue, plus Ollama and Hugging Face models and the Git worktrees coding agents leave behind. AI apps' caches and logs are covered by the general app caches rules." } },
+        { "@type": "Question", "name": "Does ElfClean speed up my Mac?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. It frees disk space and tells you exactly how much. There is no health score and no claim that cleaning makes your Mac faster." } },
+        { "@type": "Question", "name": "Is ElfClean a subscription?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Scans, the storage map, previews and History are free, and so are cleaning one item at a time and removing an app. One purchase unlocks cleaning everything you select at once, with Family Sharing." } },
+        { "@type": "Question", "name": "Does ElfClean collect any data?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. There are no accounts, analytics or telemetry, and nothing about your files leaves your Mac." } }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
-<main>
-<header>
-  <a class="brand" href="./">ELF ✦ CLEAN</a>
-  <nav><a href="./">Support</a><a href="privacy.html">Privacy</a></nav>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="/assets/apple-touch-icon.png" alt="" width="34" height="34">ElfClean</a>
+    <nav aria-label="Main">
+      <a class="optional" href="/#guides">Guides</a>
+      <a class="optional" href="/support">Support</a>
+      <a class="button small" href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_home_nav&amp;mt=12">Mac App Store</a>
+    </nav>
+  </div>
 </header>
 
-<h1>Support</h1>
-<p class="muted">ElfClean shows what is using space in your home folder and helps you remove what can safely go: caches, logs, old downloads, Xcode and package-manager files, project build folders, coding-agent leftovers and local AI models. It's built for developers, people who build with AI, and anyone running AI tools on their Mac.</p>
+<main id="main">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Find the space AI and code left on your Mac</h1>
+        <p class="lede">Coding agents, local models and every project an AI helped you build quietly fill your disk. ElfClean finds that space, explains each item in plain language and moves nothing until you've reviewed it.</p>
+        <a class="button" href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_home_hero&amp;mt=12">Get ElfClean on the Mac App Store</a>
+        <p class="fine">Free to scan. One purchase, no subscription. macOS 15 or later.</p>
+      </div>
 
-<div class="contact">
-  <strong>Contact:</strong> <a href="mailto:csergay@gmail.com?subject=ElfClean%20support">csergay@gmail.com</a><br>
-  <span class="muted">Please include your macOS and ElfClean versions (Settings → About), the screen you were on and the exact message shown. Leave out private file names and contents.</span>
-</div>
+      <div class="gauge" role="group" aria-labelledby="gauge-title">
+        <div class="tube" aria-hidden="true">
+          <div class="used"></div>
+          <div class="band personal"></div>
+          <div class="band recommended"></div>
+          <div class="band caches"></div>
+          <div class="surface"></div>
+          <div class="after"></div>
+        </div>
+        <div class="readout">
+          <p class="ticked num" id="gauge-title"><span class="big"><span class="shows caches">28</span><span class="shows recommended">74</span><span class="shows personal">132</span></span><span class="unit">GB</span></p>
+          <p class="ticked-note">ticked. Free space goes from <strong class="num">42 GB</strong> to <strong class="num"><span class="shows caches">70</span><span class="shows recommended">116</span><span class="shows personal">174</span> GB</strong> once the Trash is emptied.</p>
+          <fieldset class="levels">
+            <legend>How much to clean</legend>
+            <label><input type="radio" name="level" id="lv-caches"><span class="dot caches"></span><span class="name">Caches</span><span class="size num">28 GB</span><span class="desc">Only what rebuilds itself.</span></label>
+            <label><input type="radio" name="level" id="lv-recommended" checked><span class="dot recommended"></span><span class="name">Recommended</span><span class="size num">74 GB</span><span class="desc">Adds older downloads and rebuildable tool files.</span></label>
+            <label><input type="radio" name="level" id="lv-personal"><span class="dot personal"></span><span class="name">Personal data</span><span class="size num">132 GB</span><span class="desc">Adds personal data and conversations. Check each before cleaning.</span></label>
+          </fieldset>
+        </div>
+        <p class="gauge-caption">An example 512 GB Mac with local models and a year of projects. Choose a level to see where the line lands.</p>
+      </div>
+    </div>
+  </section>
 
-<h2>Getting started</h2>
-<p>Grant access to your home folder, choose Everyday or Developer mode, and run a scan. Scanning only reads; nothing is removed until you review and confirm. Developer mode can also look inside the project folders you choose for build folders such as <code>node_modules</code>.</p>
+  <section class="block tinted" aria-labelledby="finds">
+    <div class="wrap">
+      <h2 id="finds">What ElfClean looks for</h2>
+      <p class="intro">More than 140 kinds of folders, each with a plain explanation of what it is, what changes if it goes and how to get it back. The colour says how careful to be.</p>
+      <table class="ledger">
+        <thead><tr><th scope="col">What</th><th scope="col">Where it usually lives</th><th scope="col">How careful</th></tr></thead>
+        <tbody>
+          <tr class="group"><td colspan="3">AI tools</td></tr>
+          <tr><th scope="row">Ollama models<span>Shared layers counted once, kept until every model using them goes.</span></th><td class="where"><code>~/.ollama/models</code></td><td><span class="tag personal">Personal data</span></td></tr>
+          <tr><th scope="row">Hugging Face models<span>The hub cache and Xet caches.</span></th><td class="where"><code>~/.cache/huggingface</code></td><td><span class="tag review">Review first</span></td></tr>
+          <tr><th scope="row">Claude Code and Codex history<span>Archived before removal, never treated as a cache.</span></th><td class="where"><code>~/.claude/projects</code>, <code>~/.codex/sessions</code></td><td><span class="tag personal">Personal data</span></td></tr>
+          <tr><th scope="row">Git worktrees agents made<span>The merged ones are ready to prune.</span></th><td class="where"><code>~/.codex/worktrees</code> and your projects</td><td><span class="tag personal">Personal data</span></td></tr>
+          <tr><th scope="row">Old agent versions<span>Claude Code and Cursor Agent keep every release they install.</span></th><td class="where"><code>~/.local/share/claude/versions</code></td><td><span class="tag review">Review first</span></td></tr>
+          <tr><th scope="row">Cursor, Devin and VS Code caches<span>Plus storage for folders you've deleted and superseded extensions.</span></th><td class="where"><code>~/Library/Application Support/Cursor</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
+          <tr class="group"><td colspan="3">Projects and developer tools</td></tr>
+          <tr><th scope="row">node_modules in old projects<span>Also <code>.next</code>, build folders, Rust <code>target</code> and virtual environments.</span></th><td class="where">The project folders you choose</td><td><span class="tag review">Review first</span></td></tr>
+          <tr><th scope="row">Package caches<span>npm, pnpm, Yarn, Bun, pip, uv, Poetry, Cargo, Go, Gradle, CocoaPods, Swift packages, Homebrew.</span></th><td class="where"><code>~/.npm</code>, <code>~/Library/Caches</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
+          <tr><th scope="row">Xcode DerivedData<span>Build files Xcode makes again on the next build.</span></th><td class="where"><code>~/Library/Developer/Xcode/DerivedData</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
+          <tr><th scope="row">Simulators and device support<span>Each device with the runtime it uses.</span></th><td class="where"><code>~/Library/Developer/CoreSimulator</code></td><td><span class="tag personal">Personal data</span></td></tr>
+          <tr class="group"><td colspan="3">Everyday</td></tr>
+          <tr><th scope="row">App caches and logs<span>Including AI apps like ChatGPT and Claude.</span></th><td class="where"><code>~/Library/Caches</code>, <code>~/Library/Logs</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
+          <tr><th scope="row">Old downloads and leftovers<span>Installers you've used and data from apps you deleted.</span></th><td class="where"><code>~/Downloads</code>, <code>~/Library</code></td><td><span class="tag review">Review first</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-<h2>What the labels mean</h2>
-<ul>
-  <li><strong>Safe</strong>: rebuilds itself when needed (caches, build files).</li>
-  <li><strong>Review</strong>: look before choosing (old downloads, leftovers from deleted apps).</li>
-  <li><strong>Caution</strong>: may be your only copy (agent history, worktrees, archives). Choose these individually, or acknowledge the listed items in the review. Large files and repositories with something to lose always need an individual choice.</li>
-</ul>
-<p>Storage shows measured coverage of your home folder, not the whole disk.</p>
+  <section class="block" aria-labelledby="git">
+    <div class="wrap split">
+      <div>
+        <h2 id="git">It won't delete work you haven't pushed</h2>
+        <p>When an AI wrote most of the code, it's easy to lose track of what's saved. ElfClean reads each project's Git repository on your Mac and shows whether it has changes that aren't committed or pushed anywhere.</p>
+        <p>Work that exists only on your Mac is marked <span class="badge">At risk</span> and never ticked for you, and it's checked again just before anything is removed.</p>
+      </div>
+      <figure class="screen">
+        <picture>
+          <source srcset="/assets/shots/projects-dark.webp" media="(prefers-color-scheme: dark)">
+          <img src="/assets/shots/projects-light.webp" width="1600" height="949" alt="ElfClean's Projects screen. The web project is marked At risk: 2 changed files and no remote outside this Mac." loading="lazy">
+        </picture>
+      </figure>
+    </div>
+  </section>
 
-<h2>Getting things back</h2>
-<p>Items move to the Trash by default. Space is freed when you empty the Trash. To undo, open History, select the entry and choose Restore…: ElfClean puts it back where it came from while it is still in the Trash (if a later cleanup reused its Trash name, History says so instead). You can also choose Reveal in Trash and drag it back yourself. macOS doesn't offer Finder's Put Back for items an App Store app moved to the Trash, so History is where the original location is kept. Once the Trash is emptied, items can't be recovered.</p>
+  <section class="block tinted" aria-labelledby="review">
+    <div class="wrap split flip">
+      <div>
+        <h2 id="review">Review everything. Get anything back.</h2>
+        <ul class="plain">
+          <li>Nothing moves until you've seen what it is, what removing it changes and how to get it back.</li>
+          <li>Items go to the Trash, and History remembers where each came from so it can put it back while it's still there.</li>
+          <li>Running apps, Apple and system apps, credentials, cloud drives and anything you mark Never Touch are left alone.</li>
+          <li>Honest numbers: measured sizes, no health score, no claim that cleaning speeds up your Mac.</li>
+        </ul>
+      </div>
+      <figure class="screen">
+        <picture>
+          <source srcset="/assets/shots/clean-dark.webp" media="(prefers-color-scheme: dark)">
+          <img src="/assets/shots/clean-light.webp" width="1600" height="1030" alt="ElfClean's Clean screen: the gauge on the left, levels from Caches to Personal data, and sections for Xcode, package downloads, AI app data and app caches." loading="lazy">
+        </picture>
+      </figure>
+    </div>
+  </section>
 
-<h2>Keep and Never touch</h2>
-<p>Keep leaves a file, folder or project out of future scans; Undo reverses it right away. Manage the full list under Settings → Folders → Never touch.</p>
+  <section class="block" aria-labelledby="who">
+    <div class="wrap">
+      <h2 id="who">Made for three kinds of full disk</h2>
+      <div class="trio">
+        <div>
+          <h3>Vibe coders</h3>
+          <p>Every project an AI helped you build keeps its own <code>node_modules</code>, build folders and caches, and agents leave worktrees, logs and old versions behind. <a href="/delete-node-modules-mac">Clearing old node_modules</a></p>
+        </div>
+        <div>
+          <h3>People who run AI on their Mac</h3>
+          <p>Local models are often 5 to 40 GB each. See every Ollama and Hugging Face model, with shared files counted once, and add model folders you keep on other disks. <a href="/remove-ollama-hugging-face-models">Removing local models</a></p>
+        </div>
+        <div>
+          <h3>Developers</h3>
+          <p>Xcode DerivedData, archives, device support and simulators, package caches for every major ecosystem, and the Git worktrees your agents made. <a href="/clear-xcode-deriveddata">Clearing Xcode's files</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<h2>Removing an app</h2>
-<p>On the Apps screen, choose an app (or drop it in). macOS asks you to grant access to that one app. Its optional cache and saved state start unticked. Apple and system apps, running apps and shared or ambiguous data are left alone.</p>
+  <section class="block tinted" aria-labelledby="terms">
+    <div class="wrap">
+      <h2 id="terms">Pay once. Keep your files to yourself.</h2>
+      <div class="terms">
+        <div>
+          <h3>Free to try, one purchase</h3>
+          <p>Scans, the storage map, previews and History are free, and so are cleaning one item at a time and removing an app. One purchase unlocks cleaning everything you select at once, on your Macs and with Family Sharing. The App Store shows the price in your currency.</p>
+        </div>
+        <div>
+          <h3>Private and sandboxed</h3>
+          <p>No accounts, analytics or telemetry. Nothing about your files leaves your Mac. ElfClean is sold through the Mac App Store and measures your home folder and the folders you add. <a href="/privacy">Privacy policy</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<h2>What's free</h2>
-<p>All scans, previews, Storage and History are free, and so are cleaning one item at a time and removing an app with its data. A one-time purchase unlocks cleaning several items at once. There is no subscription. Use <em>Restore purchase</em> with the Apple Account that bought it.</p>
+  <section class="block" aria-labelledby="faq">
+    <div class="narrow faq">
+      <h2 id="faq">Questions</h2>
+      <details>
+        <summary>Will ElfClean delete anything without asking?</summary>
+        <div>No. Scanning only reads. Nothing moves until you've reviewed it and confirmed. Items go to the Trash by default, and History can put them back while they're still there. Space is freed when you empty the Trash.</div>
+      </details>
+      <details>
+        <summary>Is it safe to delete node_modules on a Mac?</summary>
+        <div>Usually: npm, pnpm, Yarn or Bun install it again from your lockfile. ElfClean offers <code>node_modules</code> only in projects you haven't touched for a while, leaves recent ones unticked, and marks projects with uncommitted or unpushed work as At risk. <a href="/delete-node-modules-mac">More on node_modules</a></div>
+      </details>
+      <details>
+        <summary>Which AI tools does it know about?</summary>
+        <div>Claude Code, Codex, Cursor, Devin (formerly Windsurf), VS Code, Roo Code, Aider and Continue, plus Ollama and Hugging Face models and the Git worktrees agents leave behind. AI apps' caches and logs are covered by the app caches rules. <a href="/ai-coding-agents-disk-space">What coding agents leave behind</a></div>
+      </details>
+      <details>
+        <summary>Does it speed up my Mac?</summary>
+        <div>No. It frees disk space and tells you exactly how much. There's no health score and no promise that cleaning makes your Mac faster.</div>
+      </details>
+      <details>
+        <summary>Does it need Full Disk Access?</summary>
+        <div>No. ElfClean is sandboxed. You grant it your home folder, and any other folders or disks you want measured. It measures those, not the whole disk.</div>
+      </details>
+      <details>
+        <summary>Is it a subscription?</summary>
+        <div>No. Scanning is free, and one purchase unlocks cleaning several items at once. There's nothing to renew.</div>
+      </details>
+      <details>
+        <summary>Who makes it?</summary>
+        <div>ElfClean is made by Colin Sergay, an independent developer. Questions and bug reports go straight to him at <a href="mailto:csergay@gmail.com?subject=ElfClean">csergay@gmail.com</a>.</div>
+      </details>
+    </div>
+  </section>
 
-<h2>Menu bar, schedules and alerts</h2>
-<p>All optional. Scheduled scans run only while ElfClean is running and never remove anything by themselves. Low-space alerts stay quiet until space recovers.</p>
+  <section class="block tinted" aria-labelledby="guides">
+    <div class="wrap">
+      <h2 id="guides">Guides</h2>
+      <p class="intro">Where each tool keeps its files, and how to clear them by hand if you'd rather not use an app.</p>
+      <ul class="guides">
+        <li><a href="/delete-node-modules-mac">How to delete old node_modules on a Mac</a><span>Find every one, see what each takes, and remove them safely.</span></li>
+        <li><a href="/remove-ollama-hugging-face-models">Where Ollama and Hugging Face keep models</a><span>And how to remove the ones you no longer use.</span></li>
+        <li><a href="/ai-coding-agents-disk-space">What Claude Code, Codex and Cursor leave behind</a><span>Transcripts, worktrees, old versions and caches.</span></li>
+        <li><a href="/clear-xcode-deriveddata">How to clear Xcode DerivedData and simulators</a><span>What's safe, what to keep, and the commands.</span></li>
+      </ul>
+    </div>
+  </section>
 
-<footer>© 2026 Colin Sergay · <a href="privacy.html">Privacy policy</a></footer>
+  <section class="block closer">
+    <div class="wrap">
+      <div>
+        <h2>See what your Mac is holding</h2>
+        <p>Scanning is free and removes nothing.</p>
+      </div>
+      <a class="button" href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_home_footer&amp;mt=12">Get ElfClean on the Mac App Store</a>
+    </div>
+  </section>
 </main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <p><strong>ElfClean</strong> frees up space from AI tools and code on your Mac.</p>
+      <p>© 2026 Colin Sergay. Mac and Xcode are trademarks of Apple Inc. Other product names belong to their owners; ElfClean isn't affiliated with them.</p>
+    </div>
+    <div>
+      <h2>Guides</h2>
+      <ul>
+        <li><a href="/delete-node-modules-mac">node_modules</a></li>
+        <li><a href="/remove-ollama-hugging-face-models">Ollama and Hugging Face</a></li>
+        <li><a href="/ai-coding-agents-disk-space">Coding agents</a></li>
+        <li><a href="/clear-xcode-deriveddata">Xcode</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>ElfClean</h2>
+      <ul>
+        <li><a href="/support">Support</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="mailto:csergay@gmail.com?subject=ElfClean">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
