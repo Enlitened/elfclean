@@ -1,0 +1,56 @@
+<!doctype html>
+<!-- The social card, assets/og-card.png. Colours come from the site's style.css; the gauge shows
+     the same example as the home page's Recommended level. Regenerate with tools/og-card/render.sh. -->
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>ElfClean social card</title>
+<link rel="stylesheet" href="../../style.css">
+<style>
+@font-face {
+  font-family: "Hanken Grotesk";
+  src: url("../../assets/fonts/HankenGrotesk.ttf") format("truetype");
+  font-weight: 100 900;
+}
+html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--bg); }
+body { position: relative; font-family: "Hanken Grotesk", sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+
+.brand-row { position: absolute; left: 73px; top: 72px; display: flex; align-items: center; gap: 14px; font-size: 32px; font-weight: 700; letter-spacing: -0.01em; }
+.brand-row img { width: 66px; height: 66px; display: block; }
+h1 { position: absolute; left: 80px; top: 174px; width: 720px; margin: 0; font-size: 69px; line-height: 78px; font-weight: 800; letter-spacing: -0.015em; }
+.sub { position: absolute; left: 80px; top: 354px; width: 690px; margin: 0; font-size: 28px; line-height: 38px; color: var(--muted); text-wrap: pretty; }
+
+/* The gauge's percentages are the ones in style.css (.band, .surface, .after). */
+.card-tube { position: absolute; left: 847px; top: 72px; width: 108px; height: 485px; box-sizing: border-box; border-radius: 54px; background: var(--tube); border: 1px solid var(--tube-edge); }
+.card-tube div { position: absolute; left: 0; right: 0; }
+.card-used { bottom: 0; height: 91.8%; background: var(--used); border-radius: 0 0 53px 53px; }
+.card-caches { bottom: 86.33%; height: 5.47%; background: var(--caches); }
+.card-recommended { bottom: 77.34%; height: 8.99%; background: var(--recommended); }
+.card-personal { bottom: 66.02%; height: 11.32%; background: var(--personal); opacity: 0.35; }
+.card-now, .card-after { right: -23px !important; height: 0; }
+.card-now { bottom: 91.8%; border-top: 2px solid var(--accent); }
+.card-after { bottom: 77.34%; border-top: 2px dashed var(--ink); }
+
+.reading { position: absolute; left: 984px; margin: 0; font-size: 20px; line-height: 28px; color: var(--muted); }
+.reading strong { display: block; font-size: 24px; line-height: 34px; font-weight: 650; color: var(--ink); }
+.reading-now { top: 46px; }
+.reading-after { top: 186px; }
+</style>
+</head>
+<body>
+  <div class="brand-row"><img src="../../assets/icon-1024.png" alt="">ElfClean</div>
+  <h1>Find the space AI and code left on your Mac</h1>
+  <p class="sub">node_modules, agent worktrees, local models, Xcode builds. Review every item; everything goes to the Trash first.</p>
+  <div class="card-tube">
+    <div class="card-used"></div>
+    <div class="card-personal"></div>
+    <div class="card-recommended"></div>
+    <div class="card-caches"></div>
+    <div class="card-now"></div>
+    <div class="card-after"></div>
+  </div>
+  <p class="reading reading-now">Now<strong>42 GB free</strong></p>
+  <p class="reading reading-after">After<strong>116 GB free</strong></p>
+</body>
+</html>
