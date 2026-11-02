@@ -106,7 +106,7 @@ du -sh ~/.ollama/models      # what the folder really uses</code></pre>
       <p>Use the exact name and tag from <code>ollama list</code>. Ollama deletes the blobs no other model needs and keeps the shared ones. Don't delete files from <code>blobs</code> by hand: a blob that looks unused may belong to another model.</p>
 
       <h2>Hugging Face</h2>
-      <p>Models, datasets and Spaces downloaded with <code>transformers</code>, <code>diffusers</code>, <code>huggingface_hub</code> or the Hugging Face CLI go into the hub cache at <code>~/.cache/huggingface/hub</code>. <code>HF_HOME</code> or <code>HF_HUB_CACHE</code> moves it. Newer versions also keep a Xet cache beside it, in <code>~/.cache/huggingface/xet</code>.</p>
+      <p>Models, datasets and Spaces downloaded with <code>transformers</code>, <code>diffusers</code>, <code>huggingface_hub</code> or the Hugging Face CLI go into the hub cache at <code>~/.cache/huggingface/hub</code>. <code>HF_HOME</code> or <code>HF_HUB_CACHE</code> moves it. Newer versions also keep a Xet cache beside it, in <code>~/.cache/huggingface/xet</code>. ElfClean treats Xet caches as experimental, so only the Advanced level or your own tick takes them.</p>
       <p>Each repository gets a folder named like <code>models--meta-llama--Llama-3.1-8B</code>, with <code>blobs</code> for the files, <code>snapshots</code> for each revision you've used and <code>refs</code> naming which revision is current. Old revisions keep their files until you remove them.</p>
       <h3>See what you have</h3>
 <pre><code>huggingface-cli scan-cache</code></pre>
@@ -134,7 +134,7 @@ du -sh ~/.ollama/models      # what the folder really uses</code></pre>
       <p>Models are never part of the Caches level, and nothing moves until you've reviewed it. What you remove goes to the Trash, where History can put it back.</p>
       <aside class="cta-box">
         <h2>Or let ElfClean find them for you</h2>
-        <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Everything goes to the Trash first. Scanning is free.<span data-prelaunch hidden> ElfClean is coming soon to the Mac App Store.</span></p>
+        <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Everything goes to the Trash first. Scanning is free.</p>
         <a class="button" href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_remove_ollama_hugging_face_models&amp;mt=12">Get ElfClean on the Mac App Store</a>
       </aside>
 

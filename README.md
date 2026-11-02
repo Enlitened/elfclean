@@ -26,9 +26,8 @@ fixture home, light and dark. App Store links carry `ct=web_*` campaign names fo
 
 When adding a page, add it to `sitemap.xml` and `llms.txt`.
 
-**Launch day:** the App Store page returns 404 until ElfClean is on sale, so the store
-buttons ask for an email and a "coming soon" note shows. When it's on sale, run
-`python3 tools/store_links.py launch`, commit and push.
+**Social card:** `assets/og-card.png` is rendered from `tools/og-card/card.html` with headless
+Chrome. After changing the card, run `tools/og-card/render.sh` and commit both.
 
 **Search engines:** Google Search Console and Bing Webmaster Tools verify through the
 two meta tags at the top of `index.html`; keep them. `0e8745614ace16b6bedc9b32e2a71208.txt`
