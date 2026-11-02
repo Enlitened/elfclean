@@ -41,7 +41,7 @@
       "name": "ElfClean",
       "alternateName": "ElfClean: Free up space from AI & code",
       "description": "A Mac app that finds the disk space AI coding tools, local models, project build folders and developer caches leave behind, explains each item in plain language and moves nothing until you have reviewed it.",
-      "applicationCategory": "UtilitiesApplication",
+      "applicationCategory": "DeveloperApplication",
       "operatingSystem": "macOS 15 or later",
       "url": "https://elfclean.app/",
       "image": "https://elfclean.app/assets/icon-1024.png",
@@ -64,7 +64,7 @@
         { "@type": "Question", "name": "Is it safe to delete node_modules on a Mac?",
           "acceptedAnswer": { "@type": "Answer", "text": "Usually: npm, pnpm, Yarn or Bun install it again from your lockfile. ElfClean offers node_modules only in projects you haven't touched for a while, leaves recent ones unticked, and marks projects with uncommitted or unpushed work as At risk." } },
         { "@type": "Question", "name": "Which AI tools does ElfClean know about?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Claude Code, Codex, Cursor, Devin (formerly Windsurf), VS Code, Roo Code, Aider and Continue, plus Ollama and Hugging Face models and the Git worktrees coding agents leave behind. AI apps' caches and logs are covered by the general app caches rules." } },
+          "acceptedAnswer": { "@type": "Answer", "text": "Claude Code, Codex, Cursor, Devin (formerly Windsurf), VS Code, Roo Code and Aider, plus Ollama and Hugging Face models and the Git worktrees coding agents leave behind. AI apps' caches and logs are covered by the general app caches rules. Continue's files are experimental, so only the Advanced level or your own tick takes them." } },
         { "@type": "Question", "name": "Does ElfClean speed up my Mac?",
           "acceptedAnswer": { "@type": "Answer", "text": "No. It frees disk space and tells you exactly how much. There is no health score and no claim that cleaning makes your Mac faster." } },
         { "@type": "Question", "name": "Is ElfClean a subscription?",
@@ -97,7 +97,7 @@
         <h1>Find the space AI and code left on your Mac</h1>
         <p class="lede">Coding agents, local models and every project an AI helped you build quietly fill your disk. ElfClean finds that space, explains each item in plain language and moves nothing until you've reviewed it.</p>
         <a class="button" href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_home_hero&amp;mt=12">Get ElfClean on the Mac App Store</a>
-        <p class="fine"><span data-prelaunch hidden>Coming soon to the Mac App Store. </span>Free to scan. One purchase, no subscription. macOS 15 or later.</p>
+        <p class="fine">Free to scan. One purchase, no subscription. macOS 15 or later.</p>
       </div>
 
       <div class="gauge" role="group" aria-labelledby="gauge-title">
@@ -133,8 +133,8 @@
         <tbody>
           <tr class="group"><td colspan="3">AI tools</td></tr>
           <tr><th scope="row">Ollama models<span>Shared layers counted once, kept until every model using them goes.</span></th><td class="where"><code>~/.ollama/models</code></td><td><span class="tag personal">Personal data</span></td></tr>
-          <tr><th scope="row">Hugging Face models<span>The hub cache and Xet caches.</span></th><td class="where"><code>~/.cache/huggingface</code></td><td><span class="tag review">Review first</span></td></tr>
-          <tr><th scope="row">Claude Code and Codex history<span>Archived before removal, never treated as a cache.</span></th><td class="where"><code>~/.claude/projects</code>, <code>~/.codex/sessions</code></td><td><span class="tag personal">Personal data</span></td></tr>
+          <tr><th scope="row">Hugging Face models<span>The hub cache. Xet caches are experimental, so only the Advanced level or your own tick takes them.</span></th><td class="where"><code>~/.cache/huggingface</code></td><td><span class="tag review">Review first</span></td></tr>
+          <tr><th scope="row">Claude Code and Codex history<span>Never treated as a cache, and old conversations can be archived first.</span></th><td class="where"><code>~/.claude/projects</code>, <code>~/.codex/sessions</code></td><td><span class="tag personal">Personal data</span></td></tr>
           <tr><th scope="row">Git worktrees agents made<span>The merged ones are ready to prune.</span></th><td class="where"><code>~/.codex/worktrees</code> and your projects</td><td><span class="tag personal">Personal data</span></td></tr>
           <tr><th scope="row">Old agent versions<span>Claude Code and Cursor Agent keep every release they install.</span></th><td class="where"><code>~/.local/share/claude/versions</code></td><td><span class="tag review">Review first</span></td></tr>
           <tr><th scope="row">Cursor, Devin and VS Code caches<span>Plus storage for folders you've deleted and superseded extensions.</span></th><td class="where"><code>~/Library/Application Support/Cursor</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
@@ -144,7 +144,7 @@
           <tr><th scope="row">Xcode DerivedData<span>Build files Xcode makes again on the next build.</span></th><td class="where"><code>~/Library/Developer/Xcode/DerivedData</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
           <tr><th scope="row">Simulators and device support<span>Each device with the runtime it uses.</span></th><td class="where"><code>~/Library/Developer/CoreSimulator</code></td><td><span class="tag personal">Personal data</span></td></tr>
           <tr class="group"><td colspan="3">Everyday</td></tr>
-          <tr><th scope="row">App caches and logs<span>Including AI apps like ChatGPT and Claude.</span></th><td class="where"><code>~/Library/Caches</code>, <code>~/Library/Logs</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
+          <tr><th scope="row">App caches and logs<span>Including AI chat apps.</span></th><td class="where"><code>~/Library/Caches</code>, <code>~/Library/Logs</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
           <tr><th scope="row">Old downloads and leftovers<span>Installers you've used and data from apps you deleted.</span></th><td class="where"><code>~/Downloads</code>, <code>~/Library</code></td><td><span class="tag review">Review first</span></td></tr>
         </tbody>
       </table>
@@ -174,7 +174,7 @@
         <ul class="plain">
           <li>Nothing moves until you've seen what it is, what removing it changes and how to get it back.</li>
           <li>Items go to the Trash, and History remembers where each came from so it can put it back while it's still there.</li>
-          <li>Running apps, Apple and system apps, credentials, cloud drives and anything you mark Never Touch are left alone.</li>
+          <li>Running apps, credentials, cloud drives and anything you mark Never Touch are left alone. Apple and system apps can't be removed, though ElfClean does offer caches that rebuild, such as those of Apple services, Music and TV.</li>
           <li>Honest numbers: measured sizes, no health score, no claim that cleaning speeds up your Mac.</li>
         </ul>
       </div>
@@ -236,7 +236,7 @@
       </details>
       <details>
         <summary>Which AI tools does it know about?</summary>
-        <div>Claude Code, Codex, Cursor, Devin (formerly Windsurf), VS Code, Roo Code, Aider and Continue, plus Ollama and Hugging Face models and the Git worktrees agents leave behind. AI apps' caches and logs are covered by the app caches rules. <a href="/ai-coding-agents-disk-space">What coding agents leave behind</a></div>
+        <div>Claude Code, Codex, Cursor, Devin (formerly Windsurf), VS Code, Roo Code and Aider, plus Ollama and Hugging Face models and the Git worktrees agents leave behind. AI apps' caches and logs are covered by the app caches rules. Continue's files are experimental, so only the Advanced level or your own tick takes them. <a href="/ai-coding-agents-disk-space">What coding agents leave behind</a></div>
       </details>
       <details>
         <summary>Does it speed up my Mac?</summary>
@@ -279,7 +279,7 @@
     <div class="wrap">
       <div>
         <h2>See what your Mac is holding</h2>
-        <p><span data-prelaunch hidden>ElfClean is coming soon to the Mac App Store. </span>Scanning is free and removes nothing.</p>
+        <p>Scanning is free and removes nothing.</p>
       </div>
       <a class="button" href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_home_footer&amp;mt=12">Get ElfClean on the Mac App Store</a>
     </div>
