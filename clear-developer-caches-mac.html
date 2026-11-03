@@ -177,7 +177,7 @@ pre-commit clean   # everything in ~/.cache/pre-commit</code></pre>
       <p>pre-commit keeps a copy of every hook repository your configs name, each with its own environment. After <code>clean</code>, the next commit in each repository installs its hooks again, which takes a while and needs a connection.</p>
 
       <h2>How ElfClean does it</h2>
-      <p>ElfClean finds the package caches for npm, pnpm, Yarn, Bun, pip, uv, Poetry, Cargo, Go, Gradle, CocoaPods, Swift packages, Homebrew and pre-commit in the locations above, and says in plain language what each one is, what happens if it's removed and how it comes back. Caches that rebuild themselves are marked Safe. Go's module cache is marked Review, because builds that need it fail offline until you download again.</p>
+      <p>ElfClean finds the package caches for npm, pnpm, Yarn, Bun, pip, uv, Poetry, Cargo, Go, Gradle, CocoaPods, Swift packages, Homebrew and pre-commit in the locations above, and says in plain language what each one is, what happens if it's removed and how it comes back. Caches that rebuild themselves are ticked from the Caches level. Go's module cache waits for Recommended, because builds that need it fail offline until you download again.</p>
       <p>It also finds build folders and virtual environments inside projects you haven't touched for a while. Homebrew's old installed versions live outside your home folder, so ElfClean can't remove them; its "Reclaim with the tool's own command" section on the AI &amp; coding screen gives you <code>brew cleanup --prune=all</code> to copy into Terminal instead.</p>
       <p>Running tools are left alone. Everything goes to the Trash, and History can put it back.</p>
       <aside class="cta-box">
