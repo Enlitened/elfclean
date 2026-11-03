@@ -1,6 +1,7 @@
 /* ElfClean site. Colours are the app's own "Aurora" palette (App/ElfClean/Sources/Styles.swift):
    ice by day, obsidian by night, one pine/mint accent. The level colours are the app's risk
-   colours and mean the same thing here: what rebuilds itself, what to review, personal data. */
+   colours and mean the same thing here: what rebuilds itself, what to review, what only Advanced
+   takes, and what's yours to tick. */
 
 @font-face {
   font-family: "Hanken Grotesk";
@@ -25,7 +26,8 @@
   --used: #c9d6d2;
   --caches: #4bc79b;
   --recommended: #0e8f70;
-  --personal: #d39a2e;
+  --advanced: #d7634e;
+  --yours: #d39a2e;
   --risk-text: #a63a2a;
   --risk-fill: #f6dcd6;
   --glow: #3fe2b0;
@@ -49,7 +51,8 @@
     --used: #23403a;
     --caches: #5ed9ae;
     --recommended: #2fb88e;
-    --personal: #e7b553;
+    --advanced: #f38a78;
+    --yours: #e7b553;
     --risk-text: #f38a78;
     --risk-fill: #3a1c17;
     --glow: #4cecbb;
@@ -143,7 +146,7 @@ a:hover { text-decoration-thickness: 2px; }
 .tube .band { transition: opacity 0.35s ease; opacity: 0.22; }
 .band.caches { bottom: 86.33%; height: 5.47%; background: var(--caches); }
 .band.recommended { bottom: 77.34%; height: 8.99%; background: var(--recommended); }
-.band.personal { bottom: 66.02%; height: 11.32%; background: var(--personal); }
+.band.advanced { bottom: 66.02%; height: 11.32%; background: var(--advanced); }
 
 .surface, .after { position: absolute; left: -34px; right: 0; height: 0; }
 .surface { bottom: 91.8%; border-top: 2px solid var(--accent); }
@@ -177,18 +180,18 @@ a:hover { text-decoration-thickness: 2px; }
 .levels label:has(input:focus-visible) { outline: 3px solid var(--glow); outline-offset: 1px; }
 .dot.caches { background: var(--caches); }
 .dot.recommended { background: var(--recommended); }
-.dot.personal { background: var(--personal); }
+.dot.advanced { background: var(--advanced); }
 
 .gauge .shows { display: none; }
 .gauge:has(#lv-caches:checked) .shows.caches,
 .gauge:has(#lv-recommended:checked) .shows.recommended,
-.gauge:has(#lv-personal:checked) .shows.personal { display: inline; }
+.gauge:has(#lv-advanced:checked) .shows.advanced { display: inline; }
 .gauge:has(#lv-caches:checked) .after { bottom: 86.33%; }
 .gauge:has(#lv-recommended:checked) .after { bottom: 77.34%; }
-.gauge:has(#lv-personal:checked) .after { bottom: 66.02%; }
+.gauge:has(#lv-advanced:checked) .after { bottom: 66.02%; }
 .gauge:has(#lv-caches:checked) .band.caches,
 .gauge:has(#lv-recommended:checked) :is(.band.caches, .band.recommended),
-.gauge:has(#lv-personal:checked) .band { opacity: 1; }
+.gauge:has(#lv-advanced:checked) .band { opacity: 1; }
 
 @media (max-width: 520px) {
   .gauge { grid-template-columns: 64px 1fr; padding: 20px 14px 18px; gap: 8px 12px; }
@@ -220,7 +223,8 @@ p { margin: 0 0 1em; }
 .tag::before { content: ""; width: 9px; height: 9px; border-radius: 50%; }
 .tag.rebuilds::before { background: var(--caches); }
 .tag.review::before { background: var(--recommended); }
-.tag.personal::before { background: var(--personal); }
+.tag.advanced::before { background: var(--advanced); }
+.tag.yours::before { background: var(--yours); }
 @media (max-width: 760px) {
   .ledger thead { display: none; }
   .ledger, .ledger tbody, .ledger tr, .ledger th, .ledger td { display: block; }
@@ -298,7 +302,7 @@ ul.plain li::before { content: ""; position: absolute; left: 0; top: 0.62em; wid
 code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 0.86em; background: var(--code-bg); padding: 2px 6px; border-radius: 6px; overflow-wrap: anywhere; }
 pre { background: var(--code-bg); border-radius: 14px; padding: 16px 18px; overflow-x: auto; font-size: 15px; line-height: 1.55; margin: 0 0 1.2em; }
 pre code { background: none; padding: 0; font-size: inherit; overflow-wrap: normal; }
-.note { border-left: 3px solid var(--personal); padding: 4px 0 4px 18px; margin: 24px 0; }
+.note { border-left: 3px solid var(--yours); padding: 4px 0 4px 18px; margin: 24px 0; }
 .note.safe { border-color: var(--caches); }
 .cta-box { margin: 48px 0 8px; background: var(--card); border: 1px solid var(--rule); border-radius: 22px; padding: 28px 30px; }
 .cta-box h2 { margin-top: 0; font-size: 26px; }

@@ -103,20 +103,20 @@
       <div class="gauge" role="group" aria-labelledby="gauge-title">
         <div class="tube" aria-hidden="true">
           <div class="used"></div>
-          <div class="band personal"></div>
+          <div class="band advanced"></div>
           <div class="band recommended"></div>
           <div class="band caches"></div>
           <div class="surface"></div>
           <div class="after"></div>
         </div>
         <div class="readout">
-          <p class="ticked num" id="gauge-title"><span class="big"><span class="shows caches">28</span><span class="shows recommended">74</span><span class="shows personal">132</span></span><span class="unit">GB</span></p>
-          <p class="ticked-note">ticked. Free space goes from <strong class="num">42 GB</strong> to <strong class="num"><span class="shows caches">70</span><span class="shows recommended">116</span><span class="shows personal">174</span> GB</strong> once the Trash is emptied.</p>
+          <p class="ticked num" id="gauge-title"><span class="big"><span class="shows caches">28</span><span class="shows recommended">74</span><span class="shows advanced">132</span></span><span class="unit">GB</span></p>
+          <p class="ticked-note">ticked. Free space goes from <strong class="num">42 GB</strong> to <strong class="num"><span class="shows caches">70</span><span class="shows recommended">116</span><span class="shows advanced">174</span> GB</strong> once the Trash is emptied.</p>
           <fieldset class="levels">
             <legend>How much to clean</legend>
             <label><input type="radio" name="level" id="lv-caches"><span class="dot caches"></span><span class="name">Caches</span><span class="size num">28 GB</span><span class="desc">Caches and crash reports.</span></label>
-            <label><input type="radio" name="level" id="lv-recommended" checked><span class="dot recommended"></span><span class="name">Recommended</span><span class="size num">74 GB</span><span class="desc">Adds older downloads and rebuildable tool files.</span></label>
-            <label><input type="radio" name="level" id="lv-personal"><span class="dot personal"></span><span class="name">Personal data</span><span class="size num">132 GB</span><span class="desc">Adds personal data and conversations. Check each before cleaning.</span></label>
+            <label><input type="radio" name="level" id="lv-recommended" checked><span class="dot recommended"></span><span class="name">Recommended</span><span class="size num">74 GB</span><span class="desc">Rebuildable caches and tool files. Models and personal files stay unticked.</span></label>
+            <label><input type="radio" name="level" id="lv-advanced"><span class="dot advanced"></span><span class="name">Advanced</span><span class="size num">132 GB</span><span class="desc">Adds stored models, recent and experimental items. Review before cleaning. Trash only.</span></label>
           </fieldset>
         </div>
         <p class="gauge-caption">An example 512 GB Mac with local models and a year of projects. Choose a level to see where the line lands.</p>
@@ -127,25 +127,25 @@
   <section class="block tinted" aria-labelledby="finds">
     <div class="wrap">
       <h2 id="finds">What ElfClean looks for</h2>
-      <p class="intro">More than 140 kinds of folders, each with a plain explanation of what it is, what changes if it goes and how to get it back. The colour says how careful to be.</p>
+      <p class="intro">More than 140 kinds of folders, each with a plain explanation of what it is, what changes if it goes and how to get it back. The colour says how careful to be: Advanced items are ticked only at that level or by you, and no level ever ticks anything marked You choose.</p>
       <table class="ledger">
         <thead><tr><th scope="col">What</th><th scope="col">Where it usually lives</th><th scope="col">How careful</th></tr></thead>
         <tbody>
           <tr class="group"><td colspan="3">AI tools</td></tr>
-          <tr><th scope="row">Ollama models<span>Shared layers counted once, kept until every model using them goes.</span></th><td class="where"><code>~/.ollama/models</code></td><td><span class="tag personal">Personal data</span></td></tr>
-          <tr><th scope="row">Hugging Face models<span>The hub cache. Xet caches are experimental, so only the Advanced level or your own tick takes them.</span></th><td class="where"><code>~/.cache/huggingface</code></td><td><span class="tag review">Review first</span></td></tr>
-          <tr><th scope="row">Claude Code and Codex history<span>Never treated as a cache, and old conversations can be archived first.</span></th><td class="where"><code>~/.claude/projects</code>, <code>~/.codex/sessions</code></td><td><span class="tag personal">Personal data</span></td></tr>
-          <tr><th scope="row">Git worktrees agents made<span>The merged ones are ready to prune.</span></th><td class="where"><code>~/.codex/worktrees</code> and your projects</td><td><span class="tag personal">Personal data</span></td></tr>
-          <tr><th scope="row">Old agent versions<span>Claude Code and Cursor Agent keep every release they install.</span></th><td class="where"><code>~/.local/share/claude/versions</code></td><td><span class="tag review">Review first</span></td></tr>
-          <tr><th scope="row">Cursor, Devin and VS Code caches<span>Plus storage for folders you've deleted and superseded extensions.</span></th><td class="where"><code>~/Library/Application Support/Cursor</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
+          <tr><th scope="row">Ollama models<span>Shared layers counted once, kept until every model using them goes.</span></th><td class="where"><code>~/.ollama/models</code></td><td><span class="tag advanced">Advanced</span></td></tr>
+          <tr><th scope="row">Hugging Face models<span>The hub cache. Xet caches are experimental, so only the Advanced level or your own tick takes them.</span></th><td class="where"><code>~/.cache/huggingface</code></td><td><span class="tag advanced">Advanced</span></td></tr>
+          <tr><th scope="row">Claude Code and Codex history<span>Never treated as a cache, and old conversations can be archived first.</span></th><td class="where"><code>~/.claude/projects</code>, <code>~/.codex/sessions</code></td><td><span class="tag yours">You choose</span></td></tr>
+          <tr><th scope="row">Git worktrees agents made<span>The merged ones are ready to prune.</span></th><td class="where"><code>~/.codex/worktrees</code> and your projects</td><td><span class="tag yours">You choose</span></td></tr>
+          <tr><th scope="row">Old agent versions<span>Claude Code and Cursor Agent keep every release they install.</span></th><td class="where"><code>~/.local/share/claude/versions</code></td><td><span class="tag yours">You choose</span></td></tr>
+          <tr><th scope="row">Cursor, Devin and VS Code caches<span>Storage for folders you've deleted and superseded extensions are listed too, for you to tick.</span></th><td class="where"><code>~/Library/Application Support/Cursor</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
           <tr class="group"><td colspan="3">Projects and developer tools</td></tr>
           <tr><th scope="row">node_modules in old projects<span>Also <code>.next</code>, build folders, Rust <code>target</code> and virtual environments.</span></th><td class="where">The project folders you choose</td><td><span class="tag review">Review first</span></td></tr>
           <tr><th scope="row">Package caches<span>npm, pnpm, Yarn, Bun, pip, uv, Poetry, Cargo, Go, Gradle, CocoaPods, Swift packages, Homebrew.</span></th><td class="where"><code>~/.npm</code>, <code>~/Library/Caches</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
           <tr><th scope="row">Xcode DerivedData<span>Build files Xcode makes again on the next build.</span></th><td class="where"><code>~/Library/Developer/Xcode/DerivedData</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
-          <tr><th scope="row">Simulators and device support<span>Each device with the runtime it uses.</span></th><td class="where"><code>~/Library/Developer/CoreSimulator</code></td><td><span class="tag personal">Personal data</span></td></tr>
+          <tr><th scope="row">Simulators and device support<span>Each device with the runtime it uses.</span></th><td class="where"><code>~/Library/Developer/CoreSimulator</code></td><td><span class="tag yours">You choose</span></td></tr>
           <tr class="group"><td colspan="3">Everyday</td></tr>
           <tr><th scope="row">App caches and logs<span>Including AI chat apps.</span></th><td class="where"><code>~/Library/Caches</code>, <code>~/Library/Logs</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
-          <tr><th scope="row">Old downloads and leftovers<span>Installers you've used and data from apps you deleted.</span></th><td class="where"><code>~/Downloads</code>, <code>~/Library</code></td><td><span class="tag review">Review first</span></td></tr>
+          <tr><th scope="row">Old downloads and leftovers<span>Installers you've used and data from apps you deleted.</span></th><td class="where"><code>~/Downloads</code>, <code>~/Library</code></td><td><span class="tag yours">You choose</span></td></tr>
         </tbody>
       </table>
     </div>
@@ -181,7 +181,7 @@
       <figure class="screen">
         <picture>
           <source srcset="/assets/shots/clean-dark.webp" media="(prefers-color-scheme: dark)">
-          <img src="/assets/shots/clean-light.webp" width="1600" height="1030" alt="ElfClean's Clean screen: the gauge on the left, levels from Caches to Personal data, and sections for Xcode, package downloads, AI app data and app caches." loading="lazy">
+          <img src="/assets/shots/clean-light.webp" width="1600" height="1030" alt="ElfClean's Clean screen: the gauge on the left, the cleaning levels beside it, and sections for Xcode, package downloads, AI app data and app caches." loading="lazy">
         </picture>
       </figure>
     </div>

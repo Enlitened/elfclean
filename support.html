@@ -53,12 +53,15 @@
 <h2>Getting started</h2>
 <p>Grant access to your home folder, choose Everyday or Developer mode, and run a scan. Scanning only reads; nothing is removed until you review and confirm. Developer mode can also look inside the project folders you choose for build folders such as <code>node_modules</code>.</p>
 
-<h2>What the labels mean</h2>
+<h2>What the levels mean</h2>
+<p>Three levels choose what's ticked for you, and you can change any tick.</p>
 <ul>
-  <li><strong>Safe</strong>: rebuilds itself when needed (caches, build files).</li>
-  <li><strong>Review</strong>: look before choosing (old downloads, leftovers from deleted apps).</li>
-  <li><strong>Caution</strong>: may be your only copy (agent history, worktrees, archives). Choose these individually, or acknowledge the listed items in the review. Large files and repositories with something to lose always need an individual choice.</li>
+  <li><strong>Caches</strong>: low-risk caches, logs and crash reports.</li>
+  <li><strong>Recommended</strong>, the starting level: adds what rebuilds, such as project build folders, <code>node_modules</code>, virtual environments, and package and tool caches. Models and personal files stay unticked.</li>
+  <li><strong>Advanced</strong>, after a warning: adds stored models, recent items and experimental items. Review them before cleaning. They go to the Trash only, and ElfClean doesn't stay on this level after you relaunch.</li>
 </ul>
+<p>Downloads, installers, language versions, conversations, worktrees, leftovers, simulator devices and archives are ticked only by you, at every level. Large files and repositories with something to lose always need an individual choice.</p>
+<p>A <strong>Yours</strong> badge marks your own files or data, and <strong>Advanced only</strong> marks what no other level takes. The review separates what rebuilds itself from what doesn't come back.</p>
 <p>Storage shows measured coverage of your home folder, not the whole disk.</p>
 
 <h2>Getting things back</h2>
