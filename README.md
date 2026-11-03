@@ -22,7 +22,9 @@ and every page's canonical link names elfclean.app.
 Plain static HTML, no build step. The colours and font are the app's (`Styles.swift`'s Palette,
 Hanken Grotesk under the OFL in `assets/fonts/`). Screenshots in `assets/shots/` are offscreen
 renders from the app repository's `ParitySnapshotTests` and `SettingsSnapshotTests` against a
-fixture home, light and dark. App Store links carry `ct=web_*` campaign names for App Analytics.
+fixture home, light and dark, except `clean-light` and `clean-dark` (and `clean-*` and
+`review-light` in `assets/press/`), which are the window cropped to 1158 x 723 from 1.1.2's App
+Store screenshots 1, 3 and 2. App Store links carry `ct=web_*` campaign names for App Analytics.
 
 When adding a page, add it to `sitemap.xml` and `llms.txt`.
 
