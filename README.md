@@ -25,7 +25,9 @@ New York can't be served, and only Safari knows `ui-serif`, so Chrome and Firefo
 Charter or another serif with lining figures; don't add Georgia to the stack, whose old-style
 figures ignore `lining-nums`. Screenshots in `assets/shots/` and `assets/press/` are offscreen
 renders from the app repository's `ParitySnapshotTests` and `SettingsSnapshotTests` against a
-fixture home, light and dark; `tools/shots/import.sh` rebuilds them and the icons. App Store links
+fixture home, light and dark; `tools/shots/import.sh` rebuilds them and the icons. The Clean,
+review and light storage map screens then come from the App Store renders' demo home, with their
+caption and backdrop cropped off, through `tools/shots/import-appstore.sh`. App Store links
 carry `ct=web_*` campaign names for App Analytics.
 
 When adding a page, add it to `sitemap.xml` and `llms.txt`.
