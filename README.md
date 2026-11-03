@@ -19,18 +19,20 @@ GitHub Pages still publishes `main` at `enlitened.github.io/elfclean/`, which th
 forwards those visits to the same page on elfclean.app (the old root was the support page),
 and every page's canonical link names elfclean.app.
 
-Plain static HTML, no build step. The colours and font are the app's (`Styles.swift`'s Palette,
-Hanken Grotesk under the OFL in `assets/fonts/`). Screenshots in `assets/shots/` are offscreen
+Plain static HTML, no build step. The colours and fonts are the app's "Lantern" look (`Styles.swift`'s
+Palette, Hanken Grotesk under the OFL in `assets/fonts/`, New York for headlines and the wordmark).
+New York can't be served, and only Safari knows `ui-serif`, so Chrome and Firefox fall back to
+Charter or another serif with lining figures; don't add Georgia to the stack, whose old-style
+figures ignore `lining-nums`. Screenshots in `assets/shots/` and `assets/press/` are offscreen
 renders from the app repository's `ParitySnapshotTests` and `SettingsSnapshotTests` against a
-fixture home, light and dark, except `clean-light` (and `clean-light` and
-`review-light` in `assets/press/`), which are the window cropped to 1158 x 723 from 1.1.2's App
-Store screenshots 1 and 2. There's no dark Clean shot: 1.1.2's App Store one shows a stray
-"model." at the start of a warning. App Store links carry `ct=web_*` campaign names for App Analytics.
+fixture home, light and dark; `tools/shots/import.sh` rebuilds them and the icons. App Store links
+carry `ct=web_*` campaign names for App Analytics.
 
 When adding a page, add it to `sitemap.xml` and `llms.txt`.
 
 **Social card:** `assets/og-card.png` is rendered from `tools/og-card/card.html` with headless
-Chrome. After changing the card, run `tools/og-card/render.sh` and commit both.
+Chrome, with New York read from the system's font file. After changing the card or the icon, run
+`tools/og-card/render.sh` and commit both.
 
 **Search engines:** Google Search Console and Bing Webmaster Tools verify through the
 two meta tags at the top of `index.html`; keep them. `0e8745614ace16b6bedc9b32e2a71208.txt`
