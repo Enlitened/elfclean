@@ -179,10 +179,10 @@ pre-commit clean   # everything in ~/.cache/pre-commit</code></pre>
       <h2>How ElfClean does it</h2>
       <p>ElfClean finds the package caches for npm, pnpm, Yarn, Bun, pip, uv, Poetry, Cargo, Go, Gradle, CocoaPods, Swift packages, Homebrew and pre-commit in the locations above, and says in plain language what each one is, what happens if it's removed and how it comes back. Caches that rebuild themselves are ticked from the Caches level. Go's module cache waits for Recommended, because builds that need it fail offline until you download again.</p>
       <p>It also finds build folders and virtual environments inside projects you haven't touched for a while. Homebrew's old installed versions live outside your home folder, so ElfClean can't remove them; its "Reclaim with the tool's own command" section on the AI &amp; coding screen gives you <code>brew cleanup --prune=all</code> to copy into Terminal instead.</p>
-      <p>Running tools are left alone. Everything goes to the Trash, and History can put it back.</p>
+      <p>Running tools are left alone. Items go to the Trash by default, and History can put them back until it's emptied.</p>
       <aside class="cta-box">
         <h2>Or let ElfClean find them for you</h2>
-        <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Everything goes to the Trash first. Scanning is free.</p>
+        <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Items go to the Trash by default. Scanning is free.</p>
         <a class="button" href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_clear_developer_caches_mac&amp;mt=12">Get ElfClean on the Mac App Store</a>
       </aside>
 

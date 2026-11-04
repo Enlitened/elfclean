@@ -43,7 +43,7 @@
   <div class="narrow">
 <p class="crumbs"><a href="/">ElfClean</a></p>
 <h1>ElfClean support</h1>
-<p class="standfirst">ElfClean shows what is using space in your home folder and helps you remove what can safely go: caches, logs, old downloads, Xcode and package-manager files, project build folders, coding-agent leftovers and local AI models. It's built for developers, people who build with AI, and anyone running AI tools on their Mac.</p>
+<p class="standfirst">ElfClean shows what is using space in your home folder and helps you remove what you don't need: caches, logs, old downloads, Xcode and package-manager files, project build folders, coding-agent leftovers and local AI models. It's built for developers, people who build with AI, and anyone running AI tools on their Mac.</p>
 
 <div class="cta-box">
   <strong>Contact:</strong> <a href="mailto:csergay@gmail.com?subject=ElfClean%20support">csergay@gmail.com</a><br>
@@ -64,8 +64,11 @@
 <p>A <strong>Yours</strong> badge marks your own files or data, and <strong>Advanced only</strong> marks what no other level takes. The review separates what rebuilds itself from what doesn't come back.</p>
 <p>Storage shows measured coverage of your home folder, not the whole disk.</p>
 
-<h2>Getting things back</h2>
-<p>Items move to the Trash by default. Space is freed when you empty the Trash. To undo, open History, select the entry and choose Restore…: ElfClean puts it back where it came from while it is still in the Trash (if a later cleanup reused its Trash name, History says so instead). You can also choose Reveal in Trash and drag it back yourself. macOS doesn't offer Finder's Put Back for items an App Store app moved to the Trash, so History is where the original location is kept. Once the Trash is emptied, items can't be recovered.</p>
+<h2 id="git-limits">What Git can't show</h2>
+<p>No level ticks work Git shows as uncommitted or unpushed, but ignored folders can be ticked, and a branch deleted on the server reads as pushed until the next fetch. If you keep your own files in an ignored folder such as <code>dist</code>, <code>out</code> or <code>build</code>, check it before you clean.</p>
+
+<h2 id="getting-things-back">Getting things back</h2>
+<p>Items move to the Trash by default. Space is freed when you empty the Trash. To undo, open History, select the entry and choose Restore…: ElfClean puts it back where it came from while it is still in the Trash (if a later cleanup reused its Trash name, History says so instead). You can also choose Reveal in Trash and drag it back yourself. macOS doesn't offer Finder's Put Back for items an App Store app moved to the Trash, so History is where the original location is kept. Once the Trash is emptied, items can't be recovered. Items already in the Trash, if you tick them, and Delete Permanently, which you turn on in Settings and the review offers only when everything ticked rebuilds itself, go for good.</p>
 
 <h2>Keep and Never touch</h2>
 <p>Keep leaves a file, folder or project out of future scans; Undo reverses it right away. Manage the full list under Settings → Folders → Never touch.</p>
