@@ -101,7 +101,7 @@
       <table>
         <thead><tr><th>Tool</th><th>Best for</th><th>Pricing model</th><th>Developer and AI tools</th><th>Review and where files go</th></tr></thead>
         <tbody>
-          <tr><td>ElfClean</td><td>Developers and people who build with AI or run local models</td><td>Free to scan; one purchase unlocks cleaning several items at once. No subscription.</td><td>Yes: Xcode, package caches, old projects, coding agents, Ollama and Hugging Face models</td><td>Review first; Trash by default, and History can put items back</td></tr>
+          <tr><td>ElfClean</td><td>Developers and people who build with AI or run local models</td><td>Free to scan; one purchase unlocks cleaning several items at once. No subscription.</td><td>Yes: Xcode, package caches, old projects, coding agents, Ollama and Hugging Face models</td><td>Review first; Trash by default, and History can put items back until it's emptied</td></tr>
           <tr><td>CleanMyMac</td><td>A broad all-in-one Mac utility, including malware removal</td><td>Subscription, monthly or yearly, or a one-time plan for the current major version</td><td>Xcode junk in the app; a separate CLI covers package caches and build folders</td><td>You choose what to remove; the pages we read don't say whether cleanup goes to the Trash</td></tr>
           <tr><td>DaisyDisk</td><td>Seeing the whole disk as a visual map</td><td>One-time</td><td>Doesn't list developer folders</td><td>You pick what to delete; its site says files are deleted permanently</td></tr>
           <tr><td>DevCleaner for Xcode</td><td>Xcode's own caches, for free</td><td>Free, with optional tips</td><td>Xcode only</td><td>You choose; the deletion method isn't documented</td></tr>
@@ -146,8 +146,8 @@
       <ul>
         <li>You use coding agents such as Claude Code, Codex, Cursor or VS Code, and want their caches, logs, old versions and leftover worktrees found, with conversation history treated as something to archive, not a cache.</li>
         <li>You run local models: Ollama and Hugging Face models are shown with shared files counted once, and you can add model folders kept elsewhere.</li>
-        <li>You have many old projects. ElfClean finds <code>node_modules</code>, build folders and virtual environments in projects you haven't touched for a while, and marks repositories with uncommitted or unpushed work as at risk, so they're never ticked for you.</li>
-        <li>You want to review before anything moves. Each item says what happens if it goes, the review separates what rebuilds itself from what doesn't come back, everything goes to the Trash by default, and History can put it back.</li>
+        <li>You have many old projects. ElfClean finds <code>node_modules</code>, build folders and virtual environments in projects you haven't touched for a while, and marks repositories where Git shows uncommitted or unpushed work as at risk, so no level ticks them (<a href="/support#git-limits">the limits</a>).</li>
+        <li>You want to review before anything moves. Each item says what happens if it goes, the review separates what rebuilds itself from what doesn't come back, items go to the Trash by default, and History can put them back until it's emptied.</li>
         <li>You want an App Store app with no subscription, no account and no telemetry, made by one developer. Scanning, the storage map and cleaning one item at a time are free; one purchase unlocks cleaning several items at once, and the App Store shows the price in your currency.</li>
       </ul>
 
@@ -166,7 +166,7 @@
       <p class="note">CleanMyMac, DaisyDisk, DevCleaner, Mole, Space Hunter, MacSweep, OmniDiskSweeper, GrandPerspective and npkill are names or trademarks of their owners. ElfClean isn't affiliated with or endorsed by any of them.</p>
       <aside class="cta-box">
         <h2>Or let ElfClean find them for you</h2>
-        <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Everything goes to the Trash first. Scanning is free.</p>
+        <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Items go to the Trash by default. Scanning is free.</p>
         <a class="button" href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_mac_cleaner_for_developers&amp;mt=12">Get ElfClean on the Mac App Store</a>
       </aside>
 

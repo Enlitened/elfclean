@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How to delete old node_modules folders on a Mac safely | ElfClean</title>
-<meta name="description" content="Find every node_modules folder on your Mac, see how much space each takes, and delete the ones in old projects without losing work. Terminal commands and a safer app.">
+<meta name="description" content="Find every node_modules folder on your Mac, see how much space each takes, and delete the ones in old projects. Terminal commands and an app with a review step.">
 <link rel="canonical" href="https://elfclean.app/delete-node-modules-mac">
 <meta name="theme-color" content="#f1f6f5" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#06110e" media="(prefers-color-scheme: dark)">
@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="ElfClean">
 <meta property="og:url" content="https://elfclean.app/delete-node-modules-mac">
 <meta property="og:title" content="How to delete old node_modules folders on a Mac safely">
-<meta property="og:description" content="Find every node_modules folder on your Mac, see how much space each takes, and delete the ones in old projects without losing work. Terminal commands and a safer app.">
+<meta property="og:description" content="Find every node_modules folder on your Mac, see how much space each takes, and delete the ones in old projects. Terminal commands and an app with a review step.">
 <meta property="og:image" content="https://elfclean.app/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -32,7 +32,7 @@
     {
       "@type": "Article",
       "headline": "How to delete old node_modules folders on a Mac safely",
-      "description": "Find every node_modules folder on your Mac, see how much space each takes, and delete the ones in old projects without losing work. Terminal commands and a safer app.",
+      "description": "Find every node_modules folder on your Mac, see how much space each takes, and delete the ones in old projects. Terminal commands and an app with a review step.",
       "datePublished": "2026-10-23",
       "dateModified": "2026-10-23",
       "mainEntityOfPage": "https://elfclean.app/delete-node-modules-mac",
@@ -93,7 +93,7 @@
   <div class="narrow">
       <p class="crumbs"><a href="/">ElfClean</a> / <a href="/#guides">Guides</a></p>
       <h1>How to delete old node_modules folders on a Mac</h1>
-      <p class="standfirst">Every JavaScript project keeps its own copy of its dependencies, and a few hundred megabytes each adds up fast, especially when an AI tool has helped you start a new project every week. Here's how to find them, what's safe to remove and how to do it without losing work.</p>
+      <p class="standfirst">Every JavaScript project keeps its own copy of its dependencies, and a few hundred megabytes each adds up fast, especially when an AI tool has helped you start a new project every week. Here's how to find them, what's safe to remove and what to check first.</p>
 
       <h2>Is it safe to delete node_modules?</h2>
       <p>Almost always. <code>node_modules</code> is rebuilt from your <code>package.json</code> and lockfile the next time you run <code>npm install</code>, <code>pnpm install</code>, <code>yarn</code> or <code>bun install</code>. Your source code isn't inside it.</p>
@@ -148,10 +148,10 @@ git log --branches --not --remotes --oneline   # commits that aren't pushed anyw
 
       <h2>How ElfClean does it</h2>
       <p>ElfClean looks in the project folders you choose and offers <code>node_modules</code>, <code>.next</code>, build folders, Rust <code>target</code> and Python virtual environments in projects you haven't touched for 30 days. Recent projects start unticked.</p>
-      <p>Each project shows its Git state. A project with changes that aren't committed or pushed anywhere is marked <span class="badge">At risk</span> and never ticked for you, and it's checked again just before anything is removed. Everything goes to the Trash, and History can put it back.</p>
+      <p>Each project shows its Git state. No level ticks work Git shows as uncommitted or unpushed: that project is marked <span class="badge">At risk</span>, and it's checked again just before anything is removed (<a href="/support#git-limits">the limits</a>). Items go to the Trash by default, and History can put them back until it's emptied.</p>
       <aside class="cta-box">
         <h2>Or let ElfClean find them for you</h2>
-        <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Everything goes to the Trash first. Scanning is free.</p>
+        <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Items go to the Trash by default. Scanning is free.</p>
         <a class="button" href="https://apps.apple.com/app/apple-store/id6819001057?pt=129383521&amp;ct=web_delete_node_modules_mac&amp;mt=12">Get ElfClean on the Mac App Store</a>
       </aside>
 
