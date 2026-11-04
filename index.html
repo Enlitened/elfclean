@@ -8,7 +8,7 @@
      for Bing Webmaster Tools. -->
 <meta name="msvalidate.01" content="0F529B2E29818D024DB5F02DE36D2F3F">
 <meta name="google-site-verification" content="7aGCpfw6L18B8Lc84oOEPyOPoc4snLjf0sCr0hPyXNg">
-<title>ElfClean: free up Mac space from AI tools, node_modules and Xcode</title>
+<title>ElfClean: Dev Cache Cleaner. Free disk space from AI &amp; code</title>
 <meta name="description" content="A Mac cleaner for people who build with AI. Find the space Claude Code, Codex, Cursor, Ollama models, old node_modules and Xcode left behind, review every item, and get it back from the Trash. No subscription.">
 <link rel="canonical" href="https://elfclean.app/">
 <meta name="theme-color" content="#f1f6f5" media="(prefers-color-scheme: light)">
@@ -16,7 +16,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ElfClean">
 <meta property="og:url" content="https://elfclean.app/">
-<meta property="og:title" content="ElfClean: find the space AI and code left on your Mac">
+<meta property="og:title" content="ElfClean: Dev Cache Cleaner. Find the space AI and code left on your Mac">
 <meta property="og:description" content="node_modules, agent worktrees, local models, Xcode builds. Review every item first; everything goes to the Trash. One purchase, no subscription.">
 <meta property="og:image" content="https://elfclean.app/assets/og-card.png">
 <meta property="og:image:width" content="1200">
@@ -39,7 +39,8 @@
       "@type": "SoftwareApplication",
       "@id": "https://elfclean.app/#app",
       "name": "ElfClean",
-      "alternateName": "ElfClean: Free up space from AI & code",
+      "alternateName": "ElfClean: Dev Cache Cleaner",
+      "alternativeHeadline": "Free disk space from AI & code",
       "description": "A Mac app that finds the disk space AI coding tools, local models, project build folders and developer caches leave behind, explains each item in plain language and moves nothing until you have reviewed it.",
       "applicationCategory": "DeveloperApplication",
       "operatingSystem": "macOS 15 or later",
@@ -142,7 +143,9 @@
           <tr><th scope="row">node_modules in old projects<span>Also <code>.next</code>, build folders, Rust <code>target</code> and virtual environments.</span></th><td class="where">The project folders you choose</td><td><span class="tag review">Review first</span></td></tr>
           <tr><th scope="row">Package caches<span>npm, pnpm, Yarn, Bun, pip, uv, Poetry, Cargo, Go, Gradle, CocoaPods, Swift packages, Homebrew.</span></th><td class="where"><code>~/.npm</code>, <code>~/Library/Caches</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
           <tr><th scope="row">Xcode DerivedData<span>Build files Xcode makes again on the next build.</span></th><td class="where"><code>~/Library/Developer/Xcode/DerivedData</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
-          <tr><th scope="row">Simulators and device support<span>Each device with the runtime it uses.</span></th><td class="where"><code>~/Library/Developer/CoreSimulator</code></td><td><span class="tag yours">You choose</span></td></tr>
+          <tr><th scope="row">Xcode device support<span>Symbols copied from devices you've connected. Recommended takes folders unused for 90 days; only Advanced or your own tick takes newer ones. Xcode copies them again the next time that device connects.</span></th><td class="where"><code>~/Library/Developer/Xcode/*DeviceSupport</code></td><td><span class="tag review">Review first</span></td></tr>
+          <tr><th scope="row">Simulator caches<span>Simulators start a little slower the first time. Your devices and their apps aren't touched.</span></th><td class="where"><code>~/Library/Developer/CoreSimulator/Caches</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
+          <tr><th scope="row">Simulator devices<span>Each device's apps and data go with it. Xcode can make a new one, but it starts empty.</span></th><td class="where"><code>~/Library/Developer/CoreSimulator/Devices</code></td><td><span class="tag yours">You choose</span></td></tr>
           <tr class="group"><td colspan="3">Everyday</td></tr>
           <tr><th scope="row">App caches and logs<span>Including AI chat apps.</span></th><td class="where"><code>~/Library/Caches</code>, <code>~/Library/Logs</code></td><td><span class="tag rebuilds">Rebuilds itself</span></td></tr>
           <tr><th scope="row">Old downloads and leftovers<span>Installers you've used and data from apps you deleted.</span></th><td class="where"><code>~/Downloads</code>, <code>~/Library</code></td><td><span class="tag yours">You choose</span></td></tr>
@@ -179,10 +182,7 @@
         </ul>
       </div>
       <figure class="screen">
-        <picture>
-          <source srcset="/assets/shots/clean-dark.webp" media="(prefers-color-scheme: dark)">
-          <img src="/assets/shots/clean-light.webp" width="1600" height="1030" alt="ElfClean's Clean screen: the gauge on the left, the cleaning levels beside it, and sections for Xcode, package downloads, AI app data and app caches." loading="lazy">
-        </picture>
+        <img src="/assets/shots/clean-light.webp" width="1158" height="723" alt="ElfClean's Clean screen: the gauge on the left with the Recommended level chosen, the Caches and Advanced levels beside it, and sections of items to clean." loading="lazy">
       </figure>
     </div>
   </section>
