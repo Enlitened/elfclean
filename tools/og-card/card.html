@@ -13,23 +13,30 @@
   src: url("../../assets/fonts/HankenGrotesk.ttf") format("truetype");
   font-weight: 100 900;
 }
+/* Only Safari knows ui-serif, and this is rendered by Chrome, so name the system's New York file. */
+@font-face {
+  font-family: "New York";
+  src: url("file:///System/Library/Fonts/NewYork.ttf") format("truetype");
+  font-weight: 1 1000;
+}
 html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; background: var(--bg); }
 body { position: relative; font-family: "Hanken Grotesk", sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
 
-.brand-row { position: absolute; left: 73px; top: 72px; display: flex; align-items: center; gap: 14px; font-size: 32px; font-weight: 700; letter-spacing: -0.01em; }
+.brand-row { position: absolute; left: 73px; top: 72px; display: flex; align-items: center; gap: 14px; font-family: "New York", serif; font-size: 34px; font-weight: 500; letter-spacing: -0.01em; }
 .brand-row img { width: 66px; height: 66px; display: block; }
-h1 { position: absolute; left: 80px; top: 174px; width: 720px; margin: 0; font-size: 69px; line-height: 78px; font-weight: 800; letter-spacing: -0.015em; }
+h1 { position: absolute; left: 80px; top: 174px; width: 720px; margin: 0; font-family: "New York", serif; font-variant-numeric: lining-nums; font-size: 66px; line-height: 76px; font-weight: 500; letter-spacing: -0.02em; }
 .sub { position: absolute; left: 80px; top: 354px; width: 690px; margin: 0; font-size: 28px; line-height: 38px; color: var(--muted); text-wrap: pretty; }
 
 /* The gauge's percentages are the ones in style.css (.band, .surface, .after). */
-.card-tube { position: absolute; left: 847px; top: 72px; width: 108px; height: 485px; box-sizing: border-box; border-radius: 54px; background: var(--tube); border: 1px solid var(--tube-edge); }
+.card-tube { position: absolute; left: 847px; top: 72px; width: 108px; height: 485px; box-sizing: border-box; border-radius: 54px 54px 12px 12px; background: var(--tube); border: 1px solid var(--rule); }
 .card-tube div { position: absolute; left: 0; right: 0; }
-.card-used { bottom: 0; height: 91.8%; background: var(--used); border-radius: 0 0 53px 53px; }
-.card-caches { bottom: 86.33%; height: 5.47%; background: var(--caches); }
-.card-recommended { bottom: 77.34%; height: 8.99%; background: var(--recommended); }
-.card-advanced { bottom: 66.02%; height: 11.32%; background: var(--advanced); opacity: 0.35; }
+.card-used { bottom: 0; height: 91.8%; background: var(--used); border-radius: 0 0 11px 11px; }
+.card-caches { bottom: 86.33%; height: 5.47%; background: var(--caches); border-top: 1px solid var(--bg); }
+.card-recommended { bottom: 77.34%; height: 8.99%; background: var(--recommended); border-top: 1px solid var(--bg); }
+.card-advanced { bottom: 66.02%; height: 11.32%; background: var(--advanced); opacity: 0.4; }
 .card-now, .card-after { right: -23px !important; height: 0; }
-.card-now { bottom: 91.8%; border-top: 2px solid var(--accent); }
+.card-now { bottom: 91.8%; border-top: 2px solid var(--surface-line); }
+.card-now::after { content: ""; position: absolute; right: 70px; top: -8px; width: 14px; height: 14px; border-radius: 50%; background: var(--lantern); }
 .card-after { bottom: 77.34%; border-top: 2px dashed var(--ink); }
 
 .reading { position: absolute; left: 984px; margin: 0; font-size: 20px; line-height: 28px; color: var(--muted); }

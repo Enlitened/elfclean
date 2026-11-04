@@ -6,8 +6,8 @@
 <title>How to free up Docker disk space on a Mac | ElfClean</title>
 <meta name="description" content="Why Docker.raw looks huge, how to see what Docker really uses, and which docker system prune options are safe, with clear warnings about volumes.">
 <link rel="canonical" href="https://elfclean.app/docker-disk-space-mac">
-<meta name="theme-color" content="#f1f6f5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#06110e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f6f3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1c1c" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ElfClean">
 <meta property="og:url" content="https://elfclean.app/docker-disk-space-mac">
@@ -104,7 +104,7 @@ ls -lh Docker.raw   # the size it may grow to
 du -h Docker.raw    # the space it takes on your disk</code></pre>
       <p class="note">Don't delete or move <code>Docker.raw</code> to save space. It holds every image, container and volume, including databases and anything else you've only stored in Docker. Use the commands below, or Docker Desktop's reset options, instead.</p>
 
-      <h2>See what's using the space</h2>
+      <h2>See what’s using the space</h2>
       <p>With Docker running:</p>
 <pre><code>docker system df
 docker system df -v   # every image, container, volume and cache entry</code></pre>
@@ -145,7 +145,7 @@ docker volume ls --filter dangling=true   # volumes no container uses</code></pr
 <pre><code>docker volume rm old-project_pgdata</code></pre>
       <p class="note">If a volume holds the only copy of a database you care about, dump it first (for example with <code>pg_dump</code> run inside the container) and keep the dump outside Docker.</p>
 
-      <h2>Docker Desktop's own settings</h2>
+      <h2>Docker Desktop’s own settings</h2>
       <p>Two things in Docker Desktop are worth knowing:</p>
       <ul>
         <li><strong>Disk usage limit.</strong> In Settings, under Resources and then Advanced, you can set the most the disk image may grow to. Lowering it can mean Docker has to delete images to fit, so check what you'd lose first.</li>

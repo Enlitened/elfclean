@@ -6,8 +6,8 @@
 <title>What System Data is on a Mac, and how to make it smaller | ElfClean</title>
 <meta name="description" content="What macOS counts as System Data, how to see what's inside it with Finder and Terminal, and which caches, snapshots and app files are safe to clear.">
 <link rel="canonical" href="https://elfclean.app/system-data-mac">
-<meta name="theme-color" content="#f1f6f5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#06110e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f6f3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1c1c" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ElfClean">
 <meta property="og:url" content="https://elfclean.app/system-data-mac">
@@ -114,7 +114,7 @@
       </div>
       <p>Exactly which category a given folder lands in isn't documented and has changed between macOS versions, so treat this as a map of where to look rather than an exact breakdown.</p>
 
-      <h2>See what's in it</h2>
+      <h2>See what’s in it</h2>
       <h3>Storage settings</h3>
       <p>Open System Settings, then General, then Storage. The bar at the top shows each category, and the list below has an information button for most of them. System Data has none: there's no list of what's inside. The Documents category is still worth a look, because its Large Files, Downloads and File Browser views show some of the same folders from a different angle.</p>
       <p>The figure can take a while to settle after you free space, and it sometimes includes purgeable space macOS would release on its own. Don't judge a cleanup by the bar in the first few minutes.</p>
@@ -139,7 +139,7 @@ du -sh ~/Library/Containers/* 2&gt;/dev/null | sort -h | tail -15</code></pre>
 <pre><code>sudo tmutil deletelocalsnapshots 2026-10-20-101500</code></pre>
       <p class="note">A deleted snapshot can't be restored from. If your backup disk hasn't been connected for a while, the local snapshots may be the only Time Machine history of recent changes.</p>
 
-      <h2>What's safe to clear</h2>
+      <h2>What’s safe to clear</h2>
       <h3>Caches and logs</h3>
       <p>Folders in <code>~/Library/Caches</code> belonging to third-party apps can go, ideally with the app quit. Leave the <code>com.apple.*</code> folders alone: macOS rebuilds them too, but some hold state system services expect, and clearing them rarely frees much. Everything in <code>~/Library/Logs</code> can go; you lose old crash reports, nothing else.</p>
 

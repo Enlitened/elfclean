@@ -6,8 +6,8 @@
 <title>How to delete old node_modules folders on a Mac safely | ElfClean</title>
 <meta name="description" content="Find every node_modules folder on your Mac, see how much space each takes, and delete the ones in old projects. Terminal commands and an app with a review step.">
 <link rel="canonical" href="https://elfclean.app/delete-node-modules-mac">
-<meta name="theme-color" content="#f1f6f5" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#06110e" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f5f6f3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1a1c1c" media="(prefers-color-scheme: dark)">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="ElfClean">
 <meta property="og:url" content="https://elfclean.app/delete-node-modules-mac">
@@ -117,7 +117,7 @@
   fi
 done</code></pre>
 
-      <h2>Check the project's work is saved first</h2>
+      <h2>Check the project’s work is saved first</h2>
       <p>Deleting <code>node_modules</code> doesn't touch your code, but clearing out old projects is usually the moment people delete the whole folder too. Before you do, check each one's Git state:</p>
 <pre><code>cd ~/dev/my-project
 git status --short          # changes that aren't committed
@@ -131,7 +131,7 @@ git log --branches --not --remotes --oneline   # commits that aren't pushed anyw
 <pre><code>find ~/dev -name node_modules -type d -prune -exec rm -rf {} +</code></pre>
       <p class="note">Commands like these remove files permanently. If you'd rather be able to change your mind, move folders to the Trash in Finder instead.</p>
 
-      <h2>Don't forget the package caches</h2>
+      <h2>Don’t forget the package caches</h2>
       <p>Package managers also keep a shared download cache, separate from each project:</p>
       <div class="table-scroll">
       <table>
