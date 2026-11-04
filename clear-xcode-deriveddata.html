@@ -132,8 +132,8 @@ xcrun simctl runtime delete &lt;runtime-id&gt;</code></pre>
       <p>Archives live in <code>~/Library/Developer/Xcode/Archives</code>, one folder per day. In Xcode's Organizer you can see which are which. Each holds the debug symbols (dSYMs) for that build; without them, crash reports from that release can't be read, and rebuilding the same commit later doesn't give identical symbols. Delete archives of builds that never shipped; keep, or back up, the ones that did.</p>
 
       <h2>How ElfClean does it</h2>
-      <p>ElfClean finds DerivedData, archives, device support unused for 90 days, simulator caches and devices (with the runtime each uses), preview devices and Xcode's own caches. It also finds DerivedData kept inside projects you haven't touched for a while, plus the package caches for Swift packages, CocoaPods and Homebrew.</p>
-      <p>DerivedData and caches are marked as rebuilding themselves. Archives and simulator devices are marked as possibly your only copy, so they wait for your decision. Items go to the Trash by default, and History can put them back until it's emptied.</p>
+      <p>ElfClean finds DerivedData, archives, device support unused for 90 days, simulator caches and devices, preview devices and Xcode's own caches. It also finds DerivedData kept inside projects you haven't touched for a while, plus the package caches for Swift packages, CocoaPods and Homebrew.</p>
+      <p>DerivedData and caches are marked as rebuilding themselves, and simulator caches are ticked from the Caches level up. Archives and simulator devices are marked as possibly your only copy, so they go only if you tick them. ElfClean doesn't remove simulator runtimes: use the commands above or Xcode's Settings for those. Items go to the Trash by default, and History can put them back until it's emptied.</p>
       <aside class="cta-box">
         <h2>Or let ElfClean find them for you</h2>
         <p>ElfClean scans your Mac for this and more than 140 other kinds of folders, explains each one in plain language and moves nothing until you've reviewed it. Items go to the Trash by default. Scanning is free.</p>
